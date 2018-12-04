@@ -11,4 +11,7 @@ describe('getContent',() => {
   it('should return one name',() => {
     deepEqual(getNames(",",1),"hello");
   });
+  it('should return n number of names',() => {
+    deepEqual(getNames(",",2),"hello,hi");
+  });
 });
