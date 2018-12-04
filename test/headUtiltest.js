@@ -8,4 +8,7 @@ describe('getContent',() => {
   it('should return empty string' ,() => {
     deepEqual(getNames(",",0),"");
   });
+  it('should return one name',() => {
+    deepEqual(getNames(",",1),"hello");
+  });
 });
