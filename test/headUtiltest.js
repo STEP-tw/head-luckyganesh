@@ -3,8 +3,8 @@ const { deepEqual } = require('assert');
 const { getContent } = require('../src/headUtil.js');
 
 describe('getContent',() => {
-  let content = "hello,hi,bye,good,bad";
-  getNames = getContent.bind(content);
+  let file = { contents:"hello,hi,bye,good,bad"};
+  getNames = getContent.bind(file);
   it('should return empty string' ,() => {
     deepEqual(getNames(",",0),"");
   });
