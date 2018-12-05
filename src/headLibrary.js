@@ -14,6 +14,10 @@ const isExists = function(checker,filePath){
   return checker(filePath);
 }
 
+const isFileExists = function(fileChecker,filePath){
+  return fileChecker(filePath).isFile();
+}
+
 const parseInputsOfHead = function(headInputs){
   let options = findOption(headInputs[0]);
   let length = findLength(headInputs.slice(0,2));
@@ -72,4 +76,4 @@ const head = function(parsedInputs,reader,existChecker,fileChecker){
   return showFormat(contents,files);
 }
 
-module.exports = { parseInputsOfHead , read , head ,checkingErrors, isExists , checkingErrors , getContentOfFile};
+module.exports = { parseInputsOfHead , read , head ,checkingErrors, isExists , checkingErrors , getContentOfFile , isFileExists};

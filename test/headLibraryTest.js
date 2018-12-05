@@ -1,4 +1,4 @@
-const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFile } = require('../src/headLibrary.js');
+const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFile ,isFileExists} = require('../src/headLibrary.js');
 
 const { deepEqual } = require('assert');
 
@@ -72,3 +72,17 @@ describe('getContentOfFile',function(){
   });
 });
 
+describe('isFileExists',function(){
+  const fileExists = function() {
+    return { isFile: () => true }
+  };
+  const fileNotExists = function() { 
+    return {isFile:() => false};
+  };
+  it('should return true for fileExists function',function(){
+    deepEqual(isFileExists(fileExists,"file"),true);
+  });
+  it('should return false for fileNotExists function',function(){
+    deepEqual(isFileExists(fileNotExists,"file"),false);
+  });
+});
