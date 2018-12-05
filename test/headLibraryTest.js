@@ -10,6 +10,6 @@ describe('applyFunction',function(){
     return ++num;
   }
   it('should apply identity function for the argument given',function(){
-    deepEqual(identity(0),0);
+    deepEqual(applyFunction(identity,0),0);
   });
 });
