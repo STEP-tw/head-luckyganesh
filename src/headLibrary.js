@@ -26,8 +26,9 @@ const checkingErrors = function(parsedInputs){
   if(options != 'n' && options != 'c'){
     return ("head: illegal option -- "+options+"\nusage: head [-n lines | -c bytes] [file ...]");
   }
+  let option = { 'n' : "line", 'c' : 'byte' }
   if(!(length > 0)){
-   return  ("head: illegal line count -- "+length);
+   return  ("head: illegal "+option[options]+" count -- "+length);
   }
   return "";
 }
@@ -53,4 +54,4 @@ const head = function(parsedInputs,reader,fileChecker){
   }).join('\n');;
 }
 
-module.exports = { parseInputsOfHead , read , head ,checkingErrors, isFileExists};
+module.exports = { parseInputsOfHead , read , head ,checkingErrors, isFileExists , checkingErrors};

@@ -1,4 +1,4 @@
-const { parseInputsOfHead , read ,isFileExists } = require('../src/headLibrary.js');
+const { parseInputsOfHead , read ,isFileExists ,checkingErrors} = require('../src/headLibrary.js');
 
 const { deepEqual } = require('assert');
 
@@ -39,6 +39,19 @@ describe('isFileExists',function(){
   });
   it('should return false for file not existance',function(){
     deepEqual(isFileExists(fileNotExists,"temp"),false);
+  });
+});
+
+describe('checkingErrors',function(){
+  it('should return empty string' ,function(){
+    deepEqual(checkingErrors({ options:'n' , length : 10}),"");
+  });
+  it('should return err msg for wrong options',function(){
+    deepEqual(checkingErrors({ options:'p' , length : 10}),("head: illegal option -- p\nusage: head [-n lines | -c bytes] [file ...]"));
+  });
+  it('should return err msg for wrong length',function(){
+    deepEqual(checkingErrors({ options:'c' , length :0 }),("head: illegal byte count -- 0"));
+    deepEqual(checkingErrors({ options:'n' , length :0 }),("head: illegal line count -- 0"));
   });
 });
 
