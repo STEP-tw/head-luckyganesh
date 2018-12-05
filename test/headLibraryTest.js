@@ -1,4 +1,4 @@
-const { applyFunction } = require('../src/headLibrary.js');
+const { applyFunction , parseInputsOfHead } = require('../src/headLibrary.js');
 
 const { deepEqual } = require('assert');
 
@@ -17,3 +17,10 @@ describe('applyFunction',function(){
     deepEqual(applyFunction(increment,0),1);
   });
 });
+
+describe('parseInputsOfHead',function(){
+  it('should return all inputs as files',function(){
+    deepEqual(parseInputsOfHead(["file1","file2"]),{ options:"n" , length:10 , files:["file1","file2"]});
+  });
+});
+

@@ -5,4 +5,8 @@ const applyFunction = function(funcName,argumentToPass){
   return funcName(argumentToPass);
 }
 
-module.exports = { applyFunction };
+const parseInputsOfHead = function(headInputs){
+  return { options:'n', length:10 , files:headInputs };
+}
+
+module.exports = { applyFunction ,parseInputsOfHead};
