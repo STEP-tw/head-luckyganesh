@@ -20,10 +20,10 @@ const parseInputsOfHead = function(headInputs){
 const checkingErrors = function(parsedInputs){
   let { options ,length } = parsedInputs;
   if(options != 'n' && options != 'c'){
-    return ("head: illegal option --"+options+"\nusage: head [-n lines | -c bytes] [file ...]");
+    return ("head: illegal option -- "+options+"\nusage: head [-n lines | -c bytes] [file ...]");
   }
   if(!(length > 0)){
-   return  ("head: illegal line count --"+length);
+   return  ("head: illegal line count -- "+length);
   }
   return "";
 }
