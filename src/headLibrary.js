@@ -49,4 +49,4 @@ const head = function(parsedInputs,reader){
 
 }
 
-module.exports = { parseInputsOfHead , read , head };
+module.exports = { parseInputsOfHead , read , head ,checkingErrors};
