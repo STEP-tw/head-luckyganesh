@@ -17,4 +17,29 @@ const parseInputsOfHead = function(headInputs){
   return { options, length , files };
 }
 
-module.exports = { parseInputsOfHead , read };
+const head = function(parsedInputs,reader){
+  let { options ,length , files } = parsedInputs;
+  if(options != 'n' && options != 'c'){
+    return  msg = "head: illegal option --"+options+"\nusage: head [-n lines | -c bytes] [file ...]";
+  }
+  if(!(length > 0)){
+    return msg = "head: illegal line count --"+length;
+  }
+  files = files.map(fileStructure);
+  files = files.map((file) => {
+    file.contents = read(reader,"utf-8",file.fileName);
+    return file;
+  });
+  contents = files.map((file) => {
+    return file.getLines(length);
+  });
+  if(contents.length == 1){
+    return contents[0];
+  }
+  return contents.map((content,index) => {
+    return createHeading(files[index].fileName)+"\n"+content+"\n";
+  }).join('\n');;
+
+}
+
+module.exports = { parseInputsOfHead , read , head };
