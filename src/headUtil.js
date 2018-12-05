@@ -3,4 +3,9 @@ const getContent = function(separator,length){
   return content.slice(0,length).join(separator);
 };
 
-module.exports = { getContent };
+const createHeading = function(name){
+  let heading = "==> "+name+" <=="
+  return heading;
+}
+
+module.exports = { getContent ,createHeading};

@@ -1,6 +1,6 @@
 const { deepEqual } = require('assert');
 
-const { getContent } = require('../src/headUtil.js');
+const { getContent,createHeading } = require('../src/headUtil.js');
 
 describe('getContent',() => {
   let file = { contents:"hello,hi,bye,good,bad"};
@@ -13,5 +13,11 @@ describe('getContent',() => {
   });
   it('should return n number of names',() => {
     deepEqual(getNames(",",2),"hello,hi");
+  });
+});
+
+describe('createHeading',function(){
+  it('should create empty heading',function(){
+    deepEqual(createHeading(""),"==>  <==");
   });
 });
