@@ -10,7 +10,7 @@ const read = function(reader,encryption,filePath){
   return reader(filePath,encryption);
 }
 
-const isFileExists = function(checker,filePath){
+const isExists = function(checker,filePath){
   return checker(filePath);
 }
 
@@ -54,4 +54,4 @@ const head = function(parsedInputs,reader,fileChecker){
   }).join('\n');;
 }
 
-module.exports = { parseInputsOfHead , read , head ,checkingErrors, isFileExists , checkingErrors};
+module.exports = { parseInputsOfHead , read , head ,checkingErrors, isExists , checkingErrors};
