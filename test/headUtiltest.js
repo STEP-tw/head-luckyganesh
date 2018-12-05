@@ -1,7 +1,8 @@
 const { deepEqual } = require('assert');
 
 const { getContent,createHeading,
-findOption
+  findOption,
+  findLength
 } = require('../src/headUtil.js');
 
 describe('getContent',() => {
@@ -40,5 +41,22 @@ describe('findOption',function(){
   });
   it('should return default case for number',function(){
     deepEqual(findOption('-5'),'n');
+  });
+});
+
+describe('findLength',function(){
+  it('should return default length n for name of file',function(){
+    deepEqual(findLength(["file","file2"]),10);
+  });
+  it('should return exact length they given',function(){
+    deepEqual(findLength(["-n","8"]),8);
+    deepEqual(findLength(["-c","3"]),3);
+  });
+  it('should return length even if it is included in option',function(){
+    deepEqual(findLength(["-n5","79"]),5);
+    deepEqual(findLength(["-c56","file"]),56);
+  });
+  it('should return default case for number',function(){
+    deepEqual(findLength(['-5',"file"]),5);
   });
 });

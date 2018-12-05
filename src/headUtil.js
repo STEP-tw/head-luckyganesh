@@ -16,7 +16,7 @@ const findOption = function(elem){
 };
 const findLength = function(options){
   let length = "10";
-  if(options[0] == "-"){
+  if(options[0][0] == "-"){
     length = +options[0].slice(1) || +options[0].slice(2) || options[1];
   }
   return length;
