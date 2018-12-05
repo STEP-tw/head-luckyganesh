@@ -11,5 +11,9 @@ describe('applyFunction',function(){
   }
   it('should apply identity function for the argument given',function(){
     deepEqual(applyFunction(identity,0),0);
+    deepEqual(applyFunction(identity,"lines"),"lines");
+  });
+  it('should apply increment function for the numbers',function(){
+    deepEqual(applyFunction(increment,0),1);
   });
 });
