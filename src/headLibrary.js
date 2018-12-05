@@ -31,7 +31,10 @@ const head = function(parsedInputs,reader){
     return file;
   });
   contents = files.map((file) => {
-    return file.getLines(length);
+    if(options == 'n'){
+      return file.getLines(length);
+    }
+    return file.getBytes(length);
   });
   if(contents.length == 1){
     return contents[0];
