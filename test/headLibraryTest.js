@@ -1,4 +1,4 @@
-const { parseInputsOfHead } = require('../src/headLibrary.js');
+const { parseInputsOfHead , read } = require('../src/headLibrary.js');
 
 const { deepEqual } = require('assert');
 
@@ -14,3 +14,19 @@ describe('parseInputsOfHead',function(){
   });
 });
 
+let readLine = function(filePath,encryption){
+  return "this is a line";
+}
+
+let readCharater = function(filePath,encryption){
+  return "this is a character";
+}
+
+describe('read',function(){
+  it('should return a line', function(){
+    deepEqual(read(readLine,"./file","utf-8"),"this is a line");
+  });
+  it('should return a character',function(){
+    deepEqual(read(readCharater,"./file","utf-8"),"this is a character");
+  });
+});

@@ -1,6 +1,10 @@
 const { getContent , createHeading } = require('./headUtil.js');
 const { fileStructure } = require('./fileLibrary.js');
 
+const read = function(reader,encryption,filePath){
+  return reader(filePath,encryption);
+}
+
 const findOption = function(elem){
   if(elem[0] != "-" || +elem.slice(1)){
     return 'n';
@@ -26,4 +30,4 @@ const parseInputsOfHead = function(headInputs){
   return { options, length , files };
 }
 
-module.exports = { parseInputsOfHead};
+module.exports = { parseInputsOfHead , read };
