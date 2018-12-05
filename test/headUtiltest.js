@@ -2,7 +2,8 @@ const { deepEqual } = require('assert');
 
 const { getContent,createHeading,
   findOption,
-  findLength
+  findLength,
+  isFileName
 } = require('../src/headUtil.js');
 
 describe('getContent',() => {
@@ -58,5 +59,16 @@ describe('findLength',function(){
   });
   it('should return default case for number',function(){
     deepEqual(findLength(['-5',"file"]),5);
+  });
+});
+
+describe('isFileName',function(){
+  it('should tell the truth for name',function(){
+    deepEqual(isFileName("file"),true);
+  });
+  it('should tell the false for not a name',function(){
+    deepEqual(isFileName("5"),false);
+    deepEqual(isFileName("-n5"),false);
+    deepEqual(isFileName("-5"),false);
   });
 });
