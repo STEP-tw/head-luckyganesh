@@ -14,12 +14,18 @@ const findOption = function(elem){
   }
   return elem[1];
 };
+
 const findLength = function(options){
-  let length = "10";
-  if(options[0][0] == "-"){
-    length = +options[0].slice(1) || +options[0].slice(2) || options[1];
+  if(options[0][0] != "-"){
+    return 10;
   }
-  return length;
+  if(isFinite(options[1].slice(1))){
+    return options[0].slice(1);
+  }
+  if(isFinite(options[0].slice(2))){
+    return options[0].slice(2);
+  }
+  return options[1];
 }
 
 const isFileName = function(fileName){
