@@ -23,4 +23,7 @@ describe('createHeading',function(){
   it('should create heading for a name',function(){
     deepEqual(createHeading("file"),"==> file <==");
   });
+  it('should create heading for numbers',function(){
+    deepEqual(createHeading(123),"==> 123 <==");
+  });
 });
