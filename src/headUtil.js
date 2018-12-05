@@ -19,10 +19,10 @@ const findLength = function(options){
   if(options[0][0] != "-"){
     return 10;
   }
-  if(isFinite(options[1].slice(1))){
+  if(isFinite(options[0])){
     return options[0].slice(1);
   }
-  if(isFinite(options[0].slice(2))){
+  if(isFinite(options[0].slice(2)) && options[0].slice(2) != ""){
     return options[0].slice(2);
   }
   return options[1];
