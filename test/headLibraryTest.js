@@ -55,30 +55,29 @@ describe('checkingErrors',function(){
   });
 });
 
+const fileExists = function() {
+  return { isFile: () => true }
+};
+const fileNotExists = function() { 
+  return {isFile:() => false};
+};
+
 describe('getContentOfFile',function(){
   const checkExist = () => true;
-  const checkNoExist = () => false;
-  const checkFileExist = () => true;
-  const checkFileNotExist = () => false;
+  const checkNotExist = () => false;
   const files = [{fileName:"file",contents:""}];
   it('should return a line',function(){
-    deepEqual(getContentOfFile(files,readLine,checkExist,checkFileExist),[{contents:'this is a line',fileName:"file"}]);
+    deepEqual(getContentOfFile(files,readLine,checkExist,fileExists),[{contents:'this is a line',fileName:"file"}]);
   });
   it('should return a character' ,function(){
-    deepEqual(getContentOfFile(files,readCharater,checkExist,checkFileExist),[{contents:'this is a character',fileName:"file"}]);
+    deepEqual(getContentOfFile(files,readCharater,checkExist,fileExists),[{contents:'this is a character',fileName:"file"}]);
   });
   it('should return content as error', function(){
-    deepEqual(getContentOfFile(files,readCharater,checkFileNotExist,readLine,checkFileExist),[{contents:'head: file: No such file or directory',fileName:'file'}]);
+    deepEqual(getContentOfFile(files,readCharater,checkNotExist,fileExists),[{contents:'head: file: No such file or directory',fileName:'file'}]);
   });
 });
 
 describe('isFileExists',function(){
-  const fileExists = function() {
-    return { isFile: () => true }
-  };
-  const fileNotExists = function() { 
-    return {isFile:() => false};
-  };
   it('should return true for fileExists function',function(){
     deepEqual(isFileExists(fileExists,"file"),true);
   });

@@ -43,6 +43,10 @@ getContentOfFile = function(files,reader,existChecker,fileChecker){
       file.contents = ("head: "+file.fileName+": No such file or directory")
       return file;
     }
+    if(!isFileExists(fileChecker,file.fileName)){
+      file.contents = ("head: Error reading "+file.fileName);
+      return file;
+    }
     file.contents = read(reader,"utf-8",file.fileName);
     return file;
   });
