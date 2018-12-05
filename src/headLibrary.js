@@ -19,12 +19,6 @@ const parseInputsOfHead = function(headInputs){
 
 const head = function(parsedInputs,reader){
   let { options ,length , files } = parsedInputs;
-  if(options != 'n' && options != 'c'){
-    return  msg = "head: illegal option --"+options+"\nusage: head [-n lines | -c bytes] [file ...]";
-  }
-  if(!(length > 0)){
-    return msg = "head: illegal line count --"+length;
-  }
   files = files.map(fileStructure);
   files = files.map((file) => {
     file.contents = read(reader,"utf-8",file.fileName);
