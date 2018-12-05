@@ -20,4 +20,7 @@ describe('createHeading',function(){
   it('should create empty heading',function(){
     deepEqual(createHeading(""),"==>  <==");
   });
+  it('should create heading for a name',function(){
+    deepEqual(createHeading("file"),"==> file <==");
+  });
 });
