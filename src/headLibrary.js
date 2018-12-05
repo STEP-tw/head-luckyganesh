@@ -1,8 +1,9 @@
-const { getContent , createHeading ,
+const { createHeading ,
 findOption,
 findLength,
 isFileName
 } = require('./headUtil.js');
+
 const { fileStructure } = require('./fileLibrary.js');
 
 const read = function(reader,encryption,filePath){
