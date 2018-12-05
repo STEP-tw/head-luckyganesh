@@ -10,6 +10,10 @@ const read = function(reader,encryption,filePath){
   return reader(filePath,encryption);
 }
 
+const isFileExists = function(checker,filePath){
+  return checker(filePath);
+}
+
 const parseInputsOfHead = function(headInputs){
   let options = findOption(headInputs[0]);
   let length = findLength(headInputs.slice(0,2));
@@ -27,7 +31,8 @@ const checkingErrors = function(parsedInputs){
   }
   return "";
 }
-const head = function(parsedInputs,reader){
+
+const head = function(parsedInputs,reader,fileChecker){
   let { options ,length , files } = parsedInputs;
   files = files.map(fileStructure);
   files = files.map((file) => {
@@ -46,7 +51,6 @@ const head = function(parsedInputs,reader){
   return contents.map((content,index) => {
     return createHeading(files[index].fileName)+"\n"+content+"\n";
   }).join('\n');;
-
 }
 
-module.exports = { parseInputsOfHead , read , head ,checkingErrors};
+module.exports = { parseInputsOfHead , read , head ,checkingErrors, isFileExists};
