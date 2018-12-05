@@ -1,10 +1,6 @@
 const { getContent , createHeading } = require('./headUtil.js');
 const { fileStructure } = require('./fileLibrary.js');
 
-const applyFunction = function(funcName,argumentToPass){
-  return funcName(argumentToPass);
-}
-
 const findOption = function(elem){
   if(elem[0] != "-" || +elem.slice(1)){
     return 'n';
@@ -30,4 +26,4 @@ const parseInputsOfHead = function(headInputs){
   return { options, length , files };
 }
 
-module.exports = { applyFunction ,parseInputsOfHead};
+module.exports = { parseInputsOfHead};
