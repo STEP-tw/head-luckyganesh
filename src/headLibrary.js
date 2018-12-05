@@ -36,7 +36,8 @@ const checkingErrors = function(parsedInputs){
 getContentOfFile = function(files,reader,existChecker,fileChecker){
   files = files.map((file) => {
     if(!isExists(existChecker,file.fileName)){
-      return ("head: "+file.fileName+": No such file or directory")
+      file.contents = ("head: "+file.fileName+": No such file or directory")
+      return file;
     }
     file.contents = read(reader,"utf-8",file.fileName);
     return file;
@@ -71,4 +72,4 @@ const head = function(parsedInputs,reader,existChecker,fileChecker){
   return showFormat(contents,files);
 }
 
-module.exports = { parseInputsOfHead , read , head ,checkingErrors, isExists , checkingErrors};
+module.exports = { parseInputsOfHead , read , head ,checkingErrors, isExists , checkingErrors , getContentOfFile};

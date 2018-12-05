@@ -1,4 +1,4 @@
-const { parseInputsOfHead , read ,isExists ,checkingErrors} = require('../src/headLibrary.js');
+const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFile } = require('../src/headLibrary.js');
 
 const { deepEqual } = require('assert');
 
@@ -52,6 +52,23 @@ describe('checkingErrors',function(){
   it('should return err msg for wrong length',function(){
     deepEqual(checkingErrors({ options:'c' , length :0 }),("head: illegal byte count -- 0"));
     deepEqual(checkingErrors({ options:'n' , length :0 }),("head: illegal line count -- 0"));
+  });
+});
+
+describe('getContentOfFile',function(){
+  const checkExist = () => true;
+  const checkNoExist = () => false;
+  const checkFileExist = () => true;
+  const checkFileNotExist = () => false;
+  const files = [{fileName:"file",contents:""}];
+  it('should return a line',function(){
+    deepEqual(getContentOfFile(files,readLine,checkExist,checkFileExist),[{contents:'this is a line',fileName:"file"}]);
+  });
+  it('should return a character' ,function(){
+    deepEqual(getContentOfFile(files,readCharater,checkExist,checkFileExist),[{contents:'this is a character',fileName:"file"}]);
+  });
+  it('should return content as error', function(){
+    deepEqual(getContentOfFile(files,readCharater,checkFileNotExist,readLine,checkFileExist),[{contents:'head: file: No such file or directory',fileName:'file'}]);
   });
 });
 
