@@ -22,7 +22,7 @@ const findLength = function(options){
   if(isFinite(options[0])){
     return options[0].slice(1);
   }
-  if(isFinite(options[0].slice(2)) && options[0].slice(2) != ""){
+  if(options[0].slice(2) || options[0].slice(2) === 0){
     return options[0].slice(2);
   }
   return options[1];
