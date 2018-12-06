@@ -1,6 +1,6 @@
 const getContent = function(separator,length){
   content = this.contents.split(separator);
-  return content.slice(0,length).join(separator);
+  return content.slice(0,length).filter((line) => line != "").join(separator);
 };
 
 const createHeading = function(name){
