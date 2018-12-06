@@ -53,8 +53,11 @@ getContentOfFile = function(files,reader,existChecker,fileChecker){
   return files;
 };
 
-const extractContent = function( files,options,length){
+const extractContent = function( files,options,length,existChecker){
   contents = files.map((file) => {
+    if(!isExists(existChecker,file.fileName)){
+      return file.contents;
+    }
     if(options == 'n'){
       return file.getLines(length);
     }
@@ -63,12 +66,18 @@ const extractContent = function( files,options,length){
   return contents;
 };
 
-const showFormat = function(contents,files){
+const showFormat = function(contents,files,existChecker){
   if(contents.length == 1){
     return contents[0];
   }
+  let delimeter = ""
   return contents.map((content,index) => {
-    return createHeading(files[index].fileName)+"\n"+content+"\n";
+    if(!isExists(existChecker,files[index].fileName)){
+      return content;
+    }
+    let msg = delimeter+createHeading(files[index].fileName)+"\n"+content;
+    delimeter = "\n";
+    return msg;
   }).join('\n');;
 }
 
@@ -77,7 +86,7 @@ const head = function(parsedInputs,reader,existChecker,fileChecker){
   files = files.map(fileStructure);
   files = getContentOfFile(files,reader,existChecker,fileChecker);
   let contents = extractContent(files,options,length,existChecker);
-  return showFormat(contents,files);
+  return showFormat(contents,files,existChecker);
 }
 
-module.exports = { parseInputsOfHead , read , head ,checkingErrors, isExists , checkingErrors , getContentOfFile , isFileExists};
+module.exports = { parseInputsOfHead , read , head ,checkingErrors, isExists , checkingErrors , getContentOfFile , isFileExists , extractContent };
