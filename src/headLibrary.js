@@ -45,7 +45,10 @@ getContentOfFiles = function(files,reader,existChecker,fileChecker,options,lengt
     }
     let heading = createHeading(file.fileName) + "\n";
     if(!isFileExists(fileChecker,file.fileName)){
-      file.contents = heading+("head: Error reading "+file.fileName);
+      file.contents = ("head: Error reading "+file.fileName);
+    if(files.length == 1) {
+      return file;
+    }
       return file;
     }
     let optionSelected = { n :"getLines" ,c: "getBytes" }
