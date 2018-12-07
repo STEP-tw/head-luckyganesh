@@ -1,4 +1,4 @@
-const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFile ,isFileExists , extractContent} = require('../src/headLibrary.js');
+const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFile ,isFileExists , extractContent , head} = require('../src/headLibrary.js');
 
 const { fileStructure } = require('../src/fileLibrary.js');
 const { deepEqual } = require('assert');
@@ -97,5 +97,12 @@ describe('extractContent',function(){
   });
   it('should give only n characters',function(){
     deepEqual(extractContent(files,'c',4,checkExist),["line"]);
+  });
+});
+
+describe('head',function(){
+  let userInputs = { options : 'n' ,length:10 ,files:["file"] }
+  it('should work for default condition',function(){
+    deepEqual(head(userInputs,readLine,checkExist,fileExists),"this is a line");
   });
 });
