@@ -1,10 +1,9 @@
-const { deepEqual } = require('assert');
+const { deepEqual } = require("assert");
 
-const { fileStructure } = require('../src/fileLibrary.js');
+const { fileStructure } = require("../src/fileLibrary.js");
 
-describe('fileStructure', () => {
-  it('should create an empty file contents',() => {
-    deepEqual(fileStructure().contents,"");
+describe("fileStructure", () => {
+  it("should create an empty file contents", () => {
+    deepEqual(fileStructure().contents, "");
   });
 });
-
