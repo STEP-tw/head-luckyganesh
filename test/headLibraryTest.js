@@ -3,6 +3,29 @@ const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFiles ,
 const { fileStructure } = require('../src/fileLibrary.js');
 const { deepEqual } = require('assert');
 
+const checkExist = () => true;
+const checkNotExist = () => false;
+let readLine = function(fileName){
+  if(fileName = "file"){
+    return "line1\nline2\nline3\nline4\nline5";
+  }
+  if(fileName == "file1"){
+    return "char1\nchar2\nchar3\nchar4\nchar5";
+  }
+  return "byte1\nbyte2\nbyte3\nbyte4\nbyte5";
+}
+
+let readCharacter = function(name){
+  return "hello";
+}
+
+const fileExists = function() {
+  return { isFile: () => true }
+};
+const fileNotExists = function() { 
+  return {isFile:() => false};
+};
+
 describe('parseInputsOfHead',function(){
   it('should return all inputs as files',function(){
     deepEqual(parseInputsOfHead(["file1","file2"]),{ options:"n" , length:10 , files:["file1","file2"]});
@@ -15,31 +38,21 @@ describe('parseInputsOfHead',function(){
   });
 });
 
-let readLine = function(filePath,encryption){
-  return "this is a line";
-}
-
-let readCharater = function(filePath,encryption){
-  return "this is a character";
-}
-
 describe('read',function(){
   it('should return a line', function(){
-    deepEqual(read(readLine,"./file","utf-8"),"this is a line");
+    deepEqual(read(readLine,"./file","utf-8"),"line1\nline2\nline3\nline4\nline5");
   });
   it('should return a character',function(){
-    deepEqual(read(readCharater,"./file","utf-8"),"this is a character");
+    deepEqual(read(readCharacter,"./file","utf-8"),"hello");
   });
 });
 
 describe('isExists',function(){
-  const fileExists = () => true;
-  const fileNotExists = () => false;
   it('should return the file exists',function(){
-    deepEqual(isExists(fileExists,"file"),true);
+    deepEqual(isExists(checkExist,"file"),true);
   });
   it('should return false for file not existance',function(){
-    deepEqual(isExists(fileNotExists,"temp"),false);
+    deepEqual(isExists(checkNotExist,"temp"),false);
   });
 });
 
@@ -56,29 +69,20 @@ describe('checkingErrors',function(){
   });
 });
 
-const fileExists = function() {
-  return { isFile: () => true }
-};
-const fileNotExists = function() { 
-  return {isFile:() => false};
-};
-
-const checkExist = () => true;
-const checkNotExist = () => false;
 describe('getContentOfFiles',function(){
   const files = [fileStructure("file")];
   const { getLines ,getBytes } = files[0];
   it('should return a line',function(){
-    deepEqual(getContentOfFiles(files,readLine,checkExist,fileExists,"n",10),[{contents:'this is a line',fileName:"file",getLines,getBytes}]);
+    deepEqual(getContentOfFiles(files,readLine,checkExist,fileExists,"n",2),[{contents:'line1\nline2',fileName:"file",getLines,getBytes}]);
   });
   it('should return a character' ,function(){
-    deepEqual(getContentOfFiles(files,readCharater,checkExist,fileExists,"c",19),[{contents:'this is a character',fileName:"file",getLines,getBytes}]);
+    deepEqual(getContentOfFiles(files,readCharacter,checkExist,fileExists,"c",3),[{contents:'hel',fileName:"file",getLines,getBytes}]);
   });
   it('should return content as error', function(){
-    deepEqual(getContentOfFiles(files,readCharater,checkNotExist,fileExists,"n",3),[{contents:'head: file: No such file or directory',fileName:'file',getBytes,getLines}]);
+    deepEqual(getContentOfFiles(files,readCharacter,checkNotExist,fileExists,"n",3),[{contents:'head: file: No such file or directory',fileName:'file',getBytes,getLines}]);
   });
   it('should return error in reading file',function(){
-    deepEqual(getContentOfFiles(files,readCharater,checkExist,fileNotExists,"n",3),[{contents:'head: Error reading file',fileName:'file',getBytes,getLines}]);
+    deepEqual(getContentOfFiles(files,readCharacter,checkExist,fileNotExists,"n",3),[{contents:'head: Error reading file',fileName:'file',getBytes,getLines}]);
   });
 });
 
@@ -92,12 +96,6 @@ describe('isFileExists',function(){
 });
 
 describe('head',function(){
-  let readLine = function(){
-    return "line1\nline2\nline3\nline4\nline5";
-  }
-  let readCharacter = function(){
-    return "hello";
-  }
   it('should work for default condition',function(){
     let userInputs = { options : 'n' ,length:10 ,files:["file"] }
     deepEqual(head(userInputs,readLine,checkExist,fileExists),"line1\nline2\nline3\nline4\nline5");
