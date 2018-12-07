@@ -1,4 +1,4 @@
-const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFiles ,isFileExists , extractContent , head} = require('../src/headLibrary.js');
+const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFiles ,isFileExists ,head} = require('../src/headLibrary.js');
 
 const { fileStructure } = require('../src/fileLibrary.js');
 const { deepEqual } = require('assert');
@@ -66,15 +66,16 @@ const fileNotExists = function() {
 const checkExist = () => true;
 const checkNotExist = () => false;
 describe('getContentOfFiles',function(){
-  const files = [{fileName:"file",contents:""}];
+  const files = [fileStructure("file")];
+  const { getLines ,getBytes } = files[0];
   it('should return a line',function(){
-    deepEqual(getContentOfFiles(files,readLine,checkExist,fileExists),[{contents:'this is a line',fileName:"file"}]);
+    deepEqual(getContentOfFiles(files,readLine,checkExist,fileExists,"n",10),[{contents:'this is a line',fileName:"file",getLines,getBytes}]);
   });
   it('should return a character' ,function(){
-    deepEqual(getContentOfFiles(files,readCharater,checkExist,fileExists),[{contents:'this is a character',fileName:"file"}]);
+    deepEqual(getContentOfFiles(files,readCharater,checkExist,fileExists,"c",19),[{contents:'this is a character',fileName:"file",getLines,getBytes}]);
   });
   it('should return content as error', function(){
-    deepEqual(getContentOfFiles(files,readCharater,checkNotExist,fileExists),[{contents:'head: file: No such file or directory',fileName:'file'}]);
+    deepEqual(getContentOfFiles(files,readCharater,checkNotExist,fileExists,"n",3),[{contents:'head: file: No such file or directory',fileName:'file',getBytes,getLines}]);
   });
 });
 
@@ -84,19 +85,6 @@ describe('isFileExists',function(){
   });
   it('should return false for fileNotExists function',function(){
     deepEqual(isFileExists(fileNotExists,"file"),false);
-  });
-});
-
-describe('extractContent',function(){
-  let content = "line1\nline2\nline3";
-  let file = fileStructure();
-  file.contents = content;
-  let files = [file]
-  it('should give only n lines',function(){
-    deepEqual(extractContent(files,'n',2,checkExist),["line1\nline2"]);
-  });
-  it('should give only n characters',function(){
-    deepEqual(extractContent(files,'c',4,checkExist),["line"]);
   });
 });
 

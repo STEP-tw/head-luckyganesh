@@ -37,56 +37,30 @@ const checkingErrors = function(parsedInputs){
   return "";
 }
 
-getContentOfFiles = function(files,reader,existChecker,fileChecker){
+getContentOfFiles = function(files,reader,existChecker,fileChecker,options,length){
   files = files.map((file) => {
     if(!isExists(existChecker,file.fileName)){
       file.contents = ("head: "+file.fileName+": No such file or directory")
       return file;
     }
+    let heading = createHeading(file.fileName) + "\n";
     if(!isFileExists(fileChecker,file.fileName)){
-      file.contents = ("head: Error reading "+file.fileName);
+      file.contents = heading+("head: Error reading "+file.fileName);
       return file;
     }
+    let optionSelected = { n :"getLines" ,c: "getBytes" }
     file.contents = read(reader,"utf-8",file.fileName);
+    file.contents = file[optionSelected[options]](length);
     return file;
   });
   return files;
 };
 
-const extractContent = function( files,options,length,existChecker){
-  contents = files.map((file) => {
-    if(!isExists(existChecker,file.fileName)){
-      return file.contents;
-    }
-    if(options == 'n'){
-      return file.getLines(length);
-    }
-    return file.getBytes(length);
-  });
-  return contents;
-};
-
-const showFormat = function(contents,files,existChecker){
-  if(contents.length == 1){
-    return contents[0];
-  }
-  let delimeter = ""
-  return contents.map((content,index) => {
-    if(!isExists(existChecker,files[index].fileName)){
-      return content;
-    }
-    let msg = delimeter+createHeading(files[index].fileName)+"\n"+content;
-    delimeter = "\n";
-    return msg;
-  }).join('\n');;
-}
-
 const head = function(parsedInputs,reader,existChecker,fileChecker){
   let { options ,length , files } = parsedInputs;
   files = files.map(fileStructure);
-  files = getContentOfFiles(files,reader,existChecker,fileChecker);
-  let contents = extractContent(files,options,length,existChecker);
-  return showFormat(contents,files,existChecker);
+  files = getContentOfFiles(files,reader,existChecker,fileChecker,options,length);
+  return files.map((file) => file.contents).join("\n");
 }
 
-module.exports = { parseInputsOfHead , read , head ,checkingErrors, isExists , checkingErrors , getContentOfFiles , isFileExists , extractContent };
+module.exports = { parseInputsOfHead , read , head ,checkingErrors, isExists , checkingErrors , getContentOfFiles , isFileExists };
