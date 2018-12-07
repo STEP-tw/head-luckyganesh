@@ -101,8 +101,18 @@ describe('extractContent',function(){
 });
 
 describe('head',function(){
-  let userInputs = { options : 'n' ,length:10 ,files:["file"] }
+  let readLine = function(){
+    return "line1\nline2\nline3\nline4\nline5";
+  }
+  let readCharacter = function(){
+    return "hello";
+  }
   it('should work for default condition',function(){
-    deepEqual(head(userInputs,readLine,checkExist,fileExists),"this is a line");
+    let userInputs = { options : 'n' ,length:10 ,files:["file"] }
+    deepEqual(head(userInputs,readLine,checkExist,fileExists),"line1\nline2\nline3\nline4\nline5");
+  });
+  it('should work for default character condition',function(){
+    let userInputs = { options : 'c' ,length:1 ,files:["file"] }
+    deepEqual(head(userInputs,readCharacter,checkExist,fileExists),"h");;
   });
 });
