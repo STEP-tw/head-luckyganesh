@@ -1,4 +1,4 @@
-const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFile ,isFileExists , extractContent , head} = require('../src/headLibrary.js');
+const { parseInputsOfHead , read ,isExists ,checkingErrors , getContentOfFiles ,isFileExists , extractContent , head} = require('../src/headLibrary.js');
 
 const { fileStructure } = require('../src/fileLibrary.js');
 const { deepEqual } = require('assert');
@@ -65,16 +65,16 @@ const fileNotExists = function() {
 
 const checkExist = () => true;
 const checkNotExist = () => false;
-describe('getContentOfFile',function(){
+describe('getContentOfFiles',function(){
   const files = [{fileName:"file",contents:""}];
   it('should return a line',function(){
-    deepEqual(getContentOfFile(files,readLine,checkExist,fileExists),[{contents:'this is a line',fileName:"file"}]);
+    deepEqual(getContentOfFiles(files,readLine,checkExist,fileExists),[{contents:'this is a line',fileName:"file"}]);
   });
   it('should return a character' ,function(){
-    deepEqual(getContentOfFile(files,readCharater,checkExist,fileExists),[{contents:'this is a character',fileName:"file"}]);
+    deepEqual(getContentOfFiles(files,readCharater,checkExist,fileExists),[{contents:'this is a character',fileName:"file"}]);
   });
   it('should return content as error', function(){
-    deepEqual(getContentOfFile(files,readCharater,checkNotExist,fileExists),[{contents:'head: file: No such file or directory',fileName:'file'}]);
+    deepEqual(getContentOfFiles(files,readCharater,checkNotExist,fileExists),[{contents:'head: file: No such file or directory',fileName:'file'}]);
   });
 });
 
