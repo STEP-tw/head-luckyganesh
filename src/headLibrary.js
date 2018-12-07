@@ -48,15 +48,12 @@ getContentOfFiles = function(files,reader,existChecker,fileChecker,options,lengt
       heading = "";
     }
     if(!isFileExists(fileChecker,file.fileName)){
-      file.contents = ("head: Error reading "+file.fileName);
+      file.contents = heading+("head: Error reading "+file.fileName);
       return file;
     }
     let optionSelected = { n :"getLines" ,c: "getBytes" }
     file.contents = read(reader,"utf-8",file.fileName);
     file.contents = file[optionSelected[options]](length);
-    if(files.length == 1) {
-      return file;
-    }
     file.contents = heading+file.contents;
     return file;
   });

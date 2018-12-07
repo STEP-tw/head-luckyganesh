@@ -106,4 +106,8 @@ describe('head',function(){
     let userInputs = { options : 'c' ,length:1 ,files:["file"] }
     deepEqual(head(userInputs,readCharacter,checkExist,fileExists),"h");;
   });
+  it('should work for default character condition',function(){
+    let userInputs = { options : 'c' ,length:1 ,files:["file","file"] }
+    deepEqual(head(userInputs,readCharacter,checkExist,fileExists),"==> file <==\nh\n==> file <==\nh");;
+  });
 });
