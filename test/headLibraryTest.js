@@ -77,6 +77,9 @@ describe('getContentOfFiles',function(){
   it('should return content as error', function(){
     deepEqual(getContentOfFiles(files,readCharater,checkNotExist,fileExists,"n",3),[{contents:'head: file: No such file or directory',fileName:'file',getBytes,getLines}]);
   });
+  it('should return error in reading file',function(){
+    deepEqual(getContentOfFiles(files,readCharater,checkExist,fileNotExists,"n",3),[{contents:'==> file <==\nhead: Error reading file',fileName:'file',getBytes,getLines}]);
+  });
 });
 
 describe('isFileExists',function(){
