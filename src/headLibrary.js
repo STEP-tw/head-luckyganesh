@@ -44,11 +44,11 @@ getContentOfFiles = function(files,reader,existChecker,fileChecker,options,lengt
       return file;
     }
     let heading = createHeading(file.fileName) + "\n";
+    if(files.length == 1) {
+      heading = "";
+    }
     if(!isFileExists(fileChecker,file.fileName)){
       file.contents = ("head: Error reading "+file.fileName);
-    if(files.length == 1) {
-      return file;
-    }
       return file;
     }
     let optionSelected = { n :"getLines" ,c: "getBytes" }
