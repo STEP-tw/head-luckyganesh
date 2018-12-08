@@ -4,7 +4,6 @@ const {
   isExists,
   checkingErrors,
   getContentOfFiles,
-  isFileExists,
   head
 } = require("../src/headLibrary.js");
 
@@ -25,13 +24,6 @@ let readLine = function(fileName) {
 
 let readCharacter = function(name) {
   return "hello";
-};
-
-const fileExists = function() {
-  return { isFile: () => true };
-};
-const fileNotExists = function() {
-  return { isFile: () => false };
 };
 
 describe("parseInputsOfHead", function() {
@@ -106,13 +98,13 @@ describe("getContentOfFiles", function() {
   const { getLines, getBytes } = files[0];
   it("should return a line", function() {
     deepEqual(
-      getContentOfFiles(files, readLine, checkExist, fileExists, "n", 2),
+      getContentOfFiles(files, readLine, checkExist, "n", 2),
       [{ contents: "line1\nline2", fileName: "file", getLines, getBytes }]
     );
   });
   it("should return a character", function() {
     deepEqual(
-      getContentOfFiles(files, readCharacter, checkExist, fileExists, "c", 3),
+      getContentOfFiles(files, readCharacter, checkExist, "c", 3),
       [{ contents: "hel", fileName: "file", getLines, getBytes }]
     );
   });
@@ -122,7 +114,6 @@ describe("getContentOfFiles", function() {
         files,
         readCharacter,
         checkNotExist,
-        fileExists,
         "n",
         3
       ),
@@ -142,13 +133,12 @@ describe("getContentOfFiles", function() {
         files,
         readCharacter,
         checkExist,
-        fileNotExists,
         "n",
         3
       ),
       [
         {
-          contents: "head: Error reading file",
+          contents: "hello",
           fileName: "file",
           getBytes,
           getLines
@@ -158,31 +148,22 @@ describe("getContentOfFiles", function() {
   });
 });
 
-describe("isFileExists", function() {
-  it("should return true for fileExists function", function() {
-    deepEqual(isFileExists(fileExists, "file"), true);
-  });
-  it("should return false for fileNotExists function", function() {
-    deepEqual(isFileExists(fileNotExists, "file"), false);
-  });
-});
-
 describe("head", function() {
   it("should work for default condition", function() {
     let userInputs = { options: "n", length: 10, files: ["file"] };
     deepEqual(
-      head(userInputs, readLine, checkExist, fileExists),
+      head(userInputs, readLine, checkExist),
       "line1\nline2\nline3\nline4\nline5"
     );
   });
   it("should work for default character condition", function() {
     let userInputs = { options: "c", length: 1, files: ["file"] };
-    deepEqual(head(userInputs, readCharacter, checkExist, fileExists), "h");
+    deepEqual(head(userInputs, readCharacter, checkExist), "h");
   });
   it("should work for default character condition", function() {
     let userInputs = { options: "c", length: 1, files: ["file", "file"] };
     deepEqual(
-      head(userInputs, readCharacter, checkExist, fileExists),
+      head(userInputs, readCharacter, checkExist),
       "==> file <==\nh\n==> file <==\nh"
     );
   });

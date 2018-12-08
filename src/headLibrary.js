@@ -15,10 +15,6 @@ const isExists = function(checker, filePath) {
   return checker(filePath);
 };
 
-const isFileExists = function(fileChecker, filePath) {
-  return fileChecker(filePath).isFile();
-};
-
 const parseInputsOfHead = function(headInputs) {
   let options = findOption(headInputs[0]);
   let length = findLength(headInputs.slice(0, 2));
@@ -46,7 +42,6 @@ getContentOfFiles = function(
   files,
   reader,
   existChecker,
-  fileChecker,
   options,
   length
 ) {
@@ -59,10 +54,6 @@ getContentOfFiles = function(
     if (files.length == 1) {
       heading = "";
     }
-    if (!isFileExists(fileChecker, file.fileName)) {
-      file.contents = heading + ("head: Error reading " + file.fileName);
-      return file;
-    }
     let optionSelected = { n: "getLines", c: "getBytes" };
     file.contents = read(reader, "utf-8", file.fileName);
     file.contents = file[optionSelected[options]](length);
@@ -72,14 +63,13 @@ getContentOfFiles = function(
   return files;
 };
 
-const head = function(parsedInputs, reader, existChecker, fileChecker) {
+const head = function(parsedInputs, reader, existChecker) {
   let { options, length, files } = parsedInputs;
   files = files.map(fileStructure);
   files = getContentOfFiles(
     files,
     reader,
     existChecker,
-    fileChecker,
     options,
     length
   );
@@ -94,5 +84,4 @@ module.exports = {
   isExists,
   checkingErrors,
   getContentOfFiles,
-  isFileExists
 };

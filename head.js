@@ -9,7 +9,7 @@ const main = function() {
   let parsedInputs = parseInputsOfHead(process.argv.slice(2));
   let err = checkingErrors(parsedInputs);
   console.log(
-    err || head(parsedInputs, fs.readFileSync, fs.existsSync, fs.lstatSync)
+    err || head(parsedInputs, fs.readFileSync, fs.existsSync)
   );
 };
 main();
