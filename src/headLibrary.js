@@ -42,7 +42,7 @@ const checkingErrors = function(parsedInputs) {
   return "";
 };
 
-getContentOfFiles = function(
+const getContentOfFiles = function(
   files,
   reader,
   existChecker,

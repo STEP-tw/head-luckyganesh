@@ -1,0 +1,11 @@
+-n5|./data/words
+-n|5|./data/words
+-5|./data/words
+./data/words|./data/tenNumbers.txt
+-n|5|./data/words|./data/tenNumbers.txt
+-n5|./data/words|./data/tenNumbers.txt
+-5|./data/words|./data/tenNumbers.txt
+-c5|./data/words
+-c|5|./data/words
+-c5|./data/words|./data/tenNumbers.txt
+-c|5|./data/words|./data/tenNumbers.txt
