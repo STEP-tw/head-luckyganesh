@@ -4,6 +4,7 @@ const {
   isExists,
   checkingErrors,
   getContentOfFiles,
+  errorForExistChecker,
   head
 } = require("../src/headLibrary.js");
 
@@ -12,6 +13,7 @@ const { deepEqual } = require("assert");
 
 const checkExist = () => true;
 const checkNotExist = () => false;
+
 let readLine = function(fileName) {
   if ((fileName = "file")) {
     return "line1\nline2\nline3\nline4\nline5";
@@ -166,5 +168,11 @@ describe("head", function() {
       head(userInputs, readCharacter, checkExist),
       "==> file <==\nh\n==> file <==\nh"
     );
+  });
+});
+
+describe('error for Existchecker',function(){
+  it('should give the format of error',function(){
+    deepEqual(errorForExistChecker('file'),"head: file: No such file or directory");
   });
 });

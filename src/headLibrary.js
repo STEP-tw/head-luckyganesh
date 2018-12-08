@@ -11,6 +11,10 @@ const read = function(reader, encryption, filePath) {
   return reader(filePath, encryption);
 };
 
+const errorForExistChecker = function(fileName){
+  return  "head: " + fileName + ": No such file or directory";
+}
+
 const isExists = function(checker, filePath) {
   return checker(filePath);
 };
@@ -47,7 +51,7 @@ getContentOfFiles = function(
 ) {
   files = files.map(file => {
     if (!isExists(existChecker, file.fileName)) {
-      file.contents = "head: " + file.fileName + ": No such file or directory";
+      file.contents = errorForExistChecker(file.fileName);
       return file;
     }
     let heading = createHeading(file.fileName) + "\n";
@@ -84,4 +88,5 @@ module.exports = {
   isExists,
   checkingErrors,
   getContentOfFiles,
+  errorForExistChecker
 };
