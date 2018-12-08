@@ -5,6 +5,7 @@ const {
   checkingErrors,
   getContentOfFiles,
   errorForExistChecker,
+  errorForIllegalCount,
   head
 } = require("../src/headLibrary.js");
 
@@ -174,5 +175,16 @@ describe("head", function() {
 describe('error for Existchecker',function(){
   it('should give the format of error',function(){
     deepEqual(errorForExistChecker('file'),"head: file: No such file or directory");
+  });
+});
+
+describe('error for illegal count',function(){
+  it('should give error msg for illegal number of lines',function(){
+    deepEqual(errorForIllegalCount('n',0),"head: illegal line count -- 0");
+    deepEqual(errorForIllegalCount('n',"abc"),"head: illegal line count -- abc");
+  });
+  it('should give error msg for illegal number of bytes',function(){
+    deepEqual(errorForIllegalCount('c',0),"head: illegal byte count -- 0");
+    deepEqual(errorForIllegalCount('c',"bca"),"head: illegal byte count -- bca");
   });
 });

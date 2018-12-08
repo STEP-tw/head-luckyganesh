@@ -15,6 +15,11 @@ const errorForExistChecker = function(fileName){
   return  "head: " + fileName + ": No such file or directory";
 }
 
+const errorForIllegalCount = function(option,length){
+  let options = { n:"line" , c:"byte" }
+  return "head: illegal " + options[option] + " count -- "+length;
+}
+
 const isExists = function(checker, filePath) {
   return checker(filePath);
 };
@@ -29,15 +34,10 @@ const parseInputsOfHead = function(headInputs) {
 const checkingErrors = function(parsedInputs) {
   let { options, length } = parsedInputs;
   if (options != "n" && options != "c") {
-    return (
-      "head: illegal option -- " +
-      options +
-      "\nusage: head [-n lines | -c bytes] [file ...]"
-    );
+    return ( "head: illegal option -- " + options + "\nusage: head [-n lines | -c bytes] [file ...]");
   }
-  let option = { n: "line", c: "byte" };
   if (!(length > 0)) {
-    return "head: illegal " + option[options] + " count -- " + length;
+    return errorForIllegalCount(options,length);
   }
   return "";
 };
@@ -70,13 +70,7 @@ getContentOfFiles = function(
 const head = function(parsedInputs, reader, existChecker) {
   let { options, length, files } = parsedInputs;
   files = files.map(fileStructure);
-  files = getContentOfFiles(
-    files,
-    reader,
-    existChecker,
-    options,
-    length
-  );
+  files = getContentOfFiles(files , reader, existChecker, options, length);
   return files.map(file => file.contents).join("\n");
 };
 
@@ -88,5 +82,6 @@ module.exports = {
   isExists,
   checkingErrors,
   getContentOfFiles,
-  errorForExistChecker
+  errorForExistChecker,
+  errorForIllegalCount
 };
