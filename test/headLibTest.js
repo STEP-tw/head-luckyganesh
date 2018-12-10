@@ -1,4 +1,4 @@
-const { head } = require('../src/headLib.js')
+const { head , runHead } = require('../src/headLib.js')
 
 const { deepEqual } = require('assert')
 const { readLine , readCharacter , checkExist } = require('./libTest.js')
@@ -25,3 +25,20 @@ describe("head", function() {
       );
     });
 });
+
+describe('runHead',function(){
+    it('should work for default condition',function(){
+        const fs = { readFileSync: readLine ,existsSync:checkExist}
+        deepEqual(runHead(['file1'],fs),'line1\nline2\nline3\nline4\nline5')
+    })
+    it('should work to give n lines ',function(){
+        const fs = { readFileSync: readLine ,existsSync:checkExist}
+        deepEqual(runHead(["-n3",'file1'],fs),'line1\nline2\nline3')
+        deepEqual(runHead(["-n1",'file1'],fs),'line1')
+    })
+    it('should work to give n bytes', function(){
+        const fs = { readFileSync: readCharacter ,existsSync:checkExist}
+        deepEqual(runHead(['-c2','file'],fs),'he')
+        deepEqual(runHead(['-c3','file'],fs),'hel')
+    })
+})
