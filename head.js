@@ -1,15 +1,6 @@
-const {
-  parseInputsOfHead,
-  head,
-  checkingErrors
-} = require("./src/lib.js");
-
+const { runHead } = require('./src/headLib.js')
 const fs = require("fs");
 const main = function() {
-  let parsedInputs = parseInputsOfHead(process.argv.slice(2));
-  let err = checkingErrors(parsedInputs);
-  console.log(
-    err || head(parsedInputs, fs.readFileSync, fs.existsSync)
-  );
+  console.log(runHead(process.argv.slice(2),fs))
 };
 main();

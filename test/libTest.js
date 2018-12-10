@@ -6,7 +6,6 @@ const {
   getContentOfFiles,
   errorForExistChecker,
   errorForIllegalCount,
-  head
 } = require("../src/lib.js");
 
 const { fileStructure } = require("../src/fileLibrary.js");
@@ -15,7 +14,7 @@ const { deepEqual } = require("assert");
 const checkExist = () => true;
 const checkNotExist = () => false;
 
-let readLine = function(fileName) {
+const readLine = function(fileName) {
   if ((fileName = "file")) {
     return "line1\nline2\nline3\nline4\nline5";
   }
@@ -100,25 +99,27 @@ describe("getContentOfFiles", function() {
   const files = [fileStructure("file")];
   const { getLines, getBytes } = files[0];
   it("should return a line", function() {
+    const fs = { readFileSync: readLine ,existsSync:checkExist}
     deepEqual(
-      getContentOfFiles(files, readLine, checkExist, "n", 2),
+      getContentOfFiles(files, "n", 2, fs ),
       [{ contents: "line1\nline2", fileName: "file", getLines, getBytes }]
     );
   });
   it("should return a character", function() {
+    const fs = { readFileSync: readCharacter ,existsSync:checkExist}
     deepEqual(
-      getContentOfFiles(files, readCharacter, checkExist, "c", 3),
+      getContentOfFiles(files, "c", 3 , fs),
       [{ contents: "hel", fileName: "file", getLines, getBytes }]
     );
   });
   it("should return content as error", function() {
+    const fs = { readFileSync: readCharacter ,existsSync:checkNotExist}
     deepEqual(
       getContentOfFiles(
         files,
-        readCharacter,
-        checkNotExist,
         "n",
-        3
+        3,
+        fs
       ),
       [
         {
@@ -130,14 +131,14 @@ describe("getContentOfFiles", function() {
       ]
     );
   });
-  it("should return error in reading file", function() {
+  it("should return characters in reading file", function() {
+    const fs = { readFileSync: readCharacter , existsSync: checkExist}
     deepEqual(
       getContentOfFiles(
         files,
-        readCharacter,
-        checkExist,
         "n",
-        3
+        3,
+        fs
       ),
       [
         {
@@ -147,27 +148,6 @@ describe("getContentOfFiles", function() {
           getLines
         }
       ]
-    );
-  });
-});
-
-describe("head", function() {
-  it("should work for default condition", function() {
-    let userInputs = { options: "n", length: 10, files: ["file"] };
-    deepEqual(
-      head(userInputs, readLine, checkExist),
-      "line1\nline2\nline3\nline4\nline5"
-    );
-  });
-  it("should work for default character condition", function() {
-    let userInputs = { options: "c", length: 1, files: ["file"] };
-    deepEqual(head(userInputs, readCharacter, checkExist), "h");
-  });
-  it("should work for default character condition", function() {
-    let userInputs = { options: "c", length: 1, files: ["file", "file"] };
-    deepEqual(
-      head(userInputs, readCharacter, checkExist),
-      "==> file <==\nh\n==> file <==\nh"
     );
   });
 });
@@ -188,3 +168,5 @@ describe('error for illegal count',function(){
     deepEqual(errorForIllegalCount('c',"bca"),"head: illegal byte count -- bca");
   });
 });
+
+module.exports = { readCharacter , readLine , checkExist }

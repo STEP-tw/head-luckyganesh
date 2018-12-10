@@ -44,11 +44,12 @@ const checkingErrors = function(parsedInputs) {
 
 const getContentOfFiles = function(
   files,
-  reader,
-  existChecker,
   options,
-  length
+  length,
+  fs
 ) {
+  const existChecker = fs.existsSync;
+  const reader = fs.readFileSync;
   files = files.map(file => {
     if (!isExists(existChecker, file.fileName)) {
       file.contents = errorForExistChecker(file.fileName);
@@ -67,17 +68,9 @@ const getContentOfFiles = function(
   return files;
 };
 
-const head = function(parsedInputs, reader, existChecker) {
-  let { options, length, files } = parsedInputs;
-  files = files.map(fileStructure);
-  files = getContentOfFiles(files , reader, existChecker, options, length);
-  return files.map(file => file.contents).join("\n");
-};
-
 module.exports = {
   parseInputsOfHead,
   read,
-  head,
   checkingErrors,
   isExists,
   checkingErrors,
