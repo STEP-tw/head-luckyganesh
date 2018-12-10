@@ -1,6 +1,6 @@
 const {fileStructure} = require('./fileLibrary');
 
-const { getContentOfFiles , parseInputsOfHead ,checkingErrors } = require('./lib.js');
+const { getContentOfFiles , parseInputs ,checkingErrors } = require('./lib.js');
 
 const head = function(parsedInputs, fs) {
     let { options, length, files } = parsedInputs;
@@ -10,7 +10,7 @@ const head = function(parsedInputs, fs) {
 };
 
 const runHead = function(userInputs,fs){
-    let parsedInputs = parseInputsOfHead(userInputs);
+    let parsedInputs = parseInputs(userInputs);
     let err = checkingErrors(parsedInputs);
     return err || head(parsedInputs, fs)
 }

@@ -24,10 +24,10 @@ const isExists = function(checker, filePath) {
   return checker(filePath);
 };
 
-const parseInputsOfHead = function(headInputs) {
-  let options = findOption(headInputs[0]);
-  let length = findLength(headInputs.slice(0, 2));
-  let files = headInputs.filter(isFileName);
+const parseInputs = function(userInputs) {
+  let options = findOption(userInputs[0]);
+  let length = findLength(userInputs.slice(0, 2));
+  let files = userInputs.filter(isFileName);
   return { options, length, files };
 };
 
@@ -69,7 +69,7 @@ const getContentOfFiles = function(
 };
 
 module.exports = {
-  parseInputsOfHead,
+  parseInputs,
   read,
   checkingErrors,
   isExists,
