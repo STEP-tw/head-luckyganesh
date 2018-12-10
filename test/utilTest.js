@@ -6,7 +6,7 @@ const {
   findOption,
   findLength,
   isFileName
-} = require("../src/headUtil.js");
+} = require("../src/util.js");
 
 describe("getContent", () => {
   let file = { contents: "hello,hi,bye,good,bad" };

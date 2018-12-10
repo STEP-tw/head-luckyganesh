@@ -7,7 +7,7 @@ const {
   errorForExistChecker,
   errorForIllegalCount,
   head
-} = require("../src/headLibrary.js");
+} = require("../src/lib.js");
 
 const { fileStructure } = require("../src/fileLibrary.js");
 const { deepEqual } = require("assert");

@@ -2,7 +2,7 @@ const {
   parseInputsOfHead,
   head,
   checkingErrors
-} = require("./src/headLibrary.js");
+} = require("./src/lib.js");
 
 const fs = require("fs");
 const main = function() {

@@ -1,4 +1,4 @@
-const { getContent } = require("./headUtil.js");
+const { getContent } = require("./util.js");
 
 const fileStructure = function(fileName) {
   let file = { fileName, contents: "" };

@@ -3,7 +3,7 @@ const {
   findOption,
   findLength,
   isFileName
-} = require("./headUtil.js");
+} = require("./util.js");
 
 const { fileStructure } = require("./fileLibrary.js");
 
