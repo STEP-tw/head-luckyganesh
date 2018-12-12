@@ -43,6 +43,6 @@ describe("runHead", function() {
   });
   it("should return 2 lines from end", function() {
     const fs = { readFileSync: readLine, existsSync: checkExist };
-    deepEqual(runHead(["-n2", "file1"], fs, "tail"), "line3\nline4\nline5");
+    deepEqual(runHead(["-n2", "file1"], fs, "tail"), "line4\nline5");
   });
 })
