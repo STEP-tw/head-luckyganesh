@@ -11,13 +11,16 @@ const read = function(reader, encryption, filePath) {
   return reader(filePath, encryption);
 };
 
-const errorForExistChecker = function(fileName){
-  return  "head: " + fileName + ": No such file or directory";
+const errorForExistChecker = function(fileName,type){
+  return  type + ": " + fileName + ": No such file or directory";
 }
 
-const errorForIllegalCount = function(option,length){
+const errorForIllegalCount = function(option,length,type){
   let options = { n:"line" , c:"byte" }
-  return "head: illegal " + options[option] + " count -- "+length;
+  let head = "head: illegal " + options[option] + " count -- "+length;
+  let tail = "tail: illegal offset -- "+length;
+  let types = {head,tail};
+  return types[type];
 }
 
 const isExists = function(checker, filePath) {
@@ -31,13 +34,16 @@ const parseInputs = function(userInputs) {
   return { options, length, files };
 };
 
-const checkingErrors = function(parsedInputs) {
+const checkingErrors = function(parsedInputs,type) {
   let { options, length } = parsedInputs;
   if (options != "n" && options != "c") {
     return ( "head: illegal option -- " + options + "\nusage: head [-n lines | -c bytes] [file ...]");
   }
+  if(length == 0 && type == "tail"){
+    return "";
+  }
   if (!(length > 0)) {
-    return errorForIllegalCount(options,length);
+    return errorForIllegalCount(options,length,"head");
   }
   return "";
 };
@@ -46,13 +52,14 @@ const getContentOfFiles = function(
   files,
   options,
   length,
-  fs
+  fs,
+  type
 ) {
   const existChecker = fs.existsSync;
   const reader = fs.readFileSync;
   files = files.map(file => {
     if (!isExists(existChecker, file.fileName)) {
-      file.contents = errorForExistChecker(file.fileName);
+      file.contents = errorForExistChecker(file.fileName,type);
       return file;
     }
     let heading = createHeading(file.fileName) + "\n";

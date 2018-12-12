@@ -75,21 +75,21 @@ describe("isExists", function() {
 
 describe("checkingErrors", function() {
   it("should return empty string", function() {
-    deepEqual(checkingErrors({ options: "n", length: 10 }), "");
+    deepEqual(checkingErrors({ options: "n", length: 10 },"head"), "");
   });
   it("should return err msg for wrong options", function() {
     deepEqual(
-      checkingErrors({ options: "p", length: 10 }),
+      checkingErrors({ options: "p", length: 10 },"head"),
       "head: illegal option -- p\nusage: head [-n lines | -c bytes] [file ...]"
     );
   });
   it("should return err msg for wrong length", function() {
     deepEqual(
-      checkingErrors({ options: "c", length: 0 }),
+      checkingErrors({ options: "c", length: 0 },"head"),
       "head: illegal byte count -- 0"
     );
     deepEqual(
-      checkingErrors({ options: "n", length: 0 }),
+      checkingErrors({ options: "n", length: 0 },"head"),
       "head: illegal line count -- 0"
     );
   });
@@ -101,14 +101,14 @@ describe("getContentOfFiles", function() {
   it("should return a line", function() {
     const fs = { readFileSync: readLine ,existsSync:checkExist}
     deepEqual(
-      getContentOfFiles(files, "n", 2, fs ),
+      getContentOfFiles(files, "n", 2, fs ,"head"),
       [{ contents: "line1\nline2", fileName: "file", getLines, getBytes }]
     );
   });
   it("should return a character", function() {
     const fs = { readFileSync: readCharacter ,existsSync:checkExist}
     deepEqual(
-      getContentOfFiles(files, "c", 3 , fs),
+      getContentOfFiles(files, "c", 3 , fs , "head"),
       [{ contents: "hel", fileName: "file", getLines, getBytes }]
     );
   });
@@ -119,7 +119,8 @@ describe("getContentOfFiles", function() {
         files,
         "n",
         3,
-        fs
+        fs,
+        "head"
       ),
       [
         {
@@ -138,7 +139,8 @@ describe("getContentOfFiles", function() {
         files,
         "n",
         3,
-        fs
+        fs,
+        "head"
       ),
       [
         {
@@ -154,18 +156,18 @@ describe("getContentOfFiles", function() {
 
 describe('error for Existchecker',function(){
   it('should give the format of error',function(){
-    deepEqual(errorForExistChecker('file'),"head: file: No such file or directory");
+    deepEqual(errorForExistChecker('file',"head"),"head: file: No such file or directory");
   });
 });
 
 describe('error for illegal count',function(){
   it('should give error msg for illegal number of lines',function(){
-    deepEqual(errorForIllegalCount('n',0),"head: illegal line count -- 0");
-    deepEqual(errorForIllegalCount('n',"abc"),"head: illegal line count -- abc");
+    deepEqual(errorForIllegalCount('n',0,"head"),"head: illegal line count -- 0");
+    deepEqual(errorForIllegalCount('n',"abc","head"),"head: illegal line count -- abc");
   });
   it('should give error msg for illegal number of bytes',function(){
-    deepEqual(errorForIllegalCount('c',0),"head: illegal byte count -- 0");
-    deepEqual(errorForIllegalCount('c',"bca"),"head: illegal byte count -- bca");
+    deepEqual(errorForIllegalCount('c',0,"head"),"head: illegal byte count -- 0");
+    deepEqual(errorForIllegalCount('c',"bca","head"),"head: illegal byte count -- bca");
   });
 });
 
