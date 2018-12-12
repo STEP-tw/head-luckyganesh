@@ -6,6 +6,7 @@ const {
   getContentOfFiles,
   errorForExistChecker,
   errorForIllegalCount,
+  errorForIllegalOption
 } = require("../src/lib.js");
 
 const { fileStructure } = require("../src/fileLibrary.js");
@@ -171,4 +172,12 @@ describe('error for illegal count',function(){
   });
 });
 
+describe('errorForIllegalOption', function() {
+  it('should return error msg for head', function() {
+    deepEqual(errorForIllegalOption("k","head"),"head: illegal option -- k\nusage: head [-n lines | -c bytes] [file ...]")
+  });
+  it('should return error msg for tail', function() {
+    deepEqual(errorForIllegalOption("k","tail"),"tail: illegal option -- k\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]")
+  });
+});
 module.exports = { readCharacter , readLine , checkExist }

@@ -23,6 +23,13 @@ const errorForIllegalCount = function(option,length,type){
   return types[type];
 }
 
+const errorForIllegalOption = function(option,type){
+  let head = "head: illegal option -- " + option + "\nusage: head [-n lines | -c bytes] [file ...]";
+  let tail = "tail: illegal option -- " + option + "\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
+  types = {head ,tail};
+  return types[type];
+}
+
 const isExists = function(checker, filePath) {
   return checker(filePath);
 };
@@ -37,7 +44,7 @@ const parseInputs = function(userInputs) {
 const checkingErrors = function(parsedInputs,type) {
   let { options, length } = parsedInputs;
   if (options != "n" && options != "c") {
-    return ( "head: illegal option -- " + options + "\nusage: head [-n lines | -c bytes] [file ...]");
+    return errorForIllegalOption(options,type)
   }
   if(length == 0 && type == "tail"){
     return "";
@@ -83,5 +90,6 @@ module.exports = {
   checkingErrors,
   getContentOfFiles,
   errorForExistChecker,
-  errorForIllegalCount
+  errorForIllegalCount,
+  errorForIllegalOption
 };
