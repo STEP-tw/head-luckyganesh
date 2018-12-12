@@ -2,16 +2,16 @@ const {fileStructure} = require('./fileLibrary');
 
 const { getContentOfFiles , parseInputs ,checkingErrors } = require('./lib.js');
 
-const head = function(parsedInputs, fs) {
+const head = function(parsedInputs, fs,type) {
     let { options, length, files } = parsedInputs;
-    files = files.map(fileStructure);
+    files = files.map(fileStructure.bind(null,type));
     files = getContentOfFiles(files , options, length, fs);
     return files.map(file => file.contents).join("\n");
 };
 
-const runHead = function(userInputs,fs){
+const runHead = function(userInputs,fs,type){
     let parsedInputs = parseInputs(userInputs);
     let err = checkingErrors(parsedInputs);
-    return err || head(parsedInputs, fs)
+    return err || head(parsedInputs, fs,type)
 }
 module.exports = { head , runHead };

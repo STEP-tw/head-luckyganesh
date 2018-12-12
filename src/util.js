@@ -6,6 +6,14 @@ const getContent = function(separator, length) {
     .join(separator);
 };
 
+const getContentOfTail = function(separator, length) {
+  content = this.contents.split(separator);
+  return content
+    .slice(content.length-length,content.length)
+    .filter(line => line != "")
+    .join(separator);
+};
+
 const createHeading = function(name) {
   let heading = "==> " + name + " <==";
   return heading;
@@ -37,6 +45,7 @@ const isFileName = function(fileName) {
 
 module.exports = {
   getContent,
+  getContentOfTail,
   createHeading,
   findOption,
   findLength,

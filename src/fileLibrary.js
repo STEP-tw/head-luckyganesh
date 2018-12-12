@@ -1,9 +1,10 @@
-const { getContent } = require("./util.js");
+const { getContent , getContentOfTail } = require("./util.js");
 
-const fileStructure = function(fileName) {
+const fileStructure = function(option,fileName) {
+  options = { head :getContent , tail:getContentOfTail };
   let file = { fileName, contents: "" };
-  file.getLines = getContent.bind(file, "\n");
-  file.getBytes = getContent.bind(file, "");
+  file.getLines = options[option].bind(file, "\n");
+  file.getBytes = options[option].bind(file, "");
   return file;
 };
 

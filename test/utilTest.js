@@ -2,6 +2,7 @@ const { deepEqual } = require("assert");
 
 const {
   getContent,
+  getContentOfTail,
   createHeading,
   findOption,
   findLength,
@@ -10,7 +11,7 @@ const {
 
 describe("getContent", () => {
   let file = { contents: "hello,hi,bye,good,bad" };
-  getNames = getContent.bind(file);
+  let getNames = getContent.bind(file);
   it("should return empty string", () => {
     deepEqual(getNames(",", 0), "");
   });
@@ -19,6 +20,20 @@ describe("getContent", () => {
   });
   it("should return n number of names", () => {
     deepEqual(getNames(",", 2), "hello,hi");
+  });
+});
+
+describe("getContentOfTail", () => {
+  let file = { contents: "hello,hi,bye,good,bad" };
+  let getNames = getContentOfTail.bind(file);
+  it("should return empty string", () => {
+    deepEqual(getNames(",", 0), "");
+  });
+  it("should return one name", () => {
+    deepEqual(getNames(",", 1), "bad");
+  });
+  it("should return n number of names", () => {
+    deepEqual(getNames(",", 2), "good,bad");
   });
 });
 

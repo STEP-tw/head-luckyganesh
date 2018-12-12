@@ -96,7 +96,7 @@ describe("checkingErrors", function() {
 });
 
 describe("getContentOfFiles", function() {
-  const files = [fileStructure("file")];
+  const files = [fileStructure("head","file")];
   const { getLines, getBytes } = files[0];
   it("should return a line", function() {
     const fs = { readFileSync: readLine ,existsSync:checkExist}
