@@ -1,5 +1,8 @@
 const getContent = function(separator, length) {
   content = this.contents.split(separator);
+  if(content[0] === ""){
+    content = content.slice(1);
+  }
   return content
     .slice(0, length)
     .filter(line => line != "")
@@ -7,11 +10,8 @@ const getContent = function(separator, length) {
 };
 
 const getContentOfTail = function(separator, length) {
-  content = this.contents.split(separator);
-  return content
-    .slice(content.length-length,content.length)
-    .filter(line => line != "")
-    .join(separator);
+  content = {contents: this.contents.split(separator).reverse().join(separator)};
+  return getContent.bind(content)(separator,length).split(separator).reverse().join(separator);
 };
 
 const createHeading = function(name) {
