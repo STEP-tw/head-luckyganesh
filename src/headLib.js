@@ -14,7 +14,7 @@ const head = function(parsedInputs, fs, type) {
 
 const runHead = function(userInputs, fs, type) {
   let parsedInputs = parseInputs(userInputs);
-  let err = checkingErrors(parsedInputs);
+  let err = checkingErrors(parsedInputs,type);
   return err || head(parsedInputs, fs, type);
 };
 module.exports = { head, runHead };

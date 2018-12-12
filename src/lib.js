@@ -50,7 +50,7 @@ const checkingErrors = function(parsedInputs,type) {
     return "";
   }
   if (!(length > 0)) {
-    return errorForIllegalCount(options,length,"head");
+    return errorForIllegalCount(options,length,type);
   }
   return "";
 };

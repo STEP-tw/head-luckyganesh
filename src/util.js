@@ -40,7 +40,7 @@ const findLength = function(options) {
 };
 
 const isFileName = function(fileName) {
-  return fileName[0] != "-" && !+fileName;
+  return fileName[0] != "-" && !+fileName && fileName != 0;
 };
 
 module.exports = {
