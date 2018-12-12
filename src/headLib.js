@@ -4,6 +4,9 @@ const { getContentOfFiles, parseInputs, checkingErrors } = require("./lib.js");
 
 const head = function(parsedInputs, fs, type) {
   let { options, length, files } = parsedInputs;
+  if(type == "tail"){
+      length = +length+1;
+  }
   files = files.map(fileStructure.bind(null, type));
   files = getContentOfFiles(files, options, length, fs, type);
   return files.map(file => file.contents).join("\n");
