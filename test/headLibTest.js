@@ -40,5 +40,9 @@ describe('runHead',function(){
         const fs = { readFileSync: readCharacter ,existsSync:checkExist}
         deepEqual(runHead(['-c2','file'],fs,"head"),'he')
         deepEqual(runHead(['-c3','file'],fs,"head"),'hel')
-    })
+    });
+    it('should return 2 lines from end', function() {
+      const fs = { readFileSync: readLine ,existsSync:checkExist}
+      deepEqual(runHead(["-n2",'file1'],fs,"tail"),'line4\nline5')
+    });
 })
