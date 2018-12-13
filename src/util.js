@@ -1,6 +1,6 @@
-const getContent = function(separator, length) {
+const getContent = function(separator, length, type) {
   content = this.contents.split(separator);
-  if(content[0] === ""){
+  if(content[0] === "" && type == "tail"){
     content = content.slice(1);
   }
   return content
@@ -9,9 +9,9 @@ const getContent = function(separator, length) {
     .join(separator);
 };
 
-const getContentOfTail = function(separator, length) {
+const getContentOfTail = function(separator, length,type) {
   content = {contents: this.contents.split(separator).reverse().join(separator)};
-  return getContent.bind(content)(separator,length).split(separator).reverse().join(separator);
+  return getContent.bind(content)(separator,length,type).split(separator).reverse().join(separator);
 };
 
 const createHeading = function(name) {
@@ -20,7 +20,7 @@ const createHeading = function(name) {
 };
 
 const findOption = function(elem) {
-  if (elem[0] != "-" || +elem.slice(1)) {
+  if (elem[0] != "-" || +elem.slice(1) || isFinite(elem.slice(1))) {
     return "n";
   }
   return elem[1];
