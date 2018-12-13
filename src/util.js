@@ -1,4 +1,4 @@
-const getContent = function(separator, length, type) {
+const getContent = function(separator, length) {
   content = this.contents.split(separator);
   return content
     .slice(0, length)
@@ -6,7 +6,7 @@ const getContent = function(separator, length, type) {
     .join(separator);
 };
 
-const getContentOfTail = function(separator, length,type) {
+const getContentOfTail = function(separator, length) {
   content = this.contents.split(separator).reverse();
   if(content[0] === ""){
     content = content.slice(1);

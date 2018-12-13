@@ -75,7 +75,7 @@ const getContentOfFiles = function(
     }
     let optionSelected = { n: "getLines", c: "getBytes" };
     file.contents = read(reader, "utf-8", file.fileName);
-    file.contents = file[optionSelected[options]](length,type);
+    file.contents = file[optionSelected[options]](length);
     file.contents = heading + file.contents;
     return file;
   });
