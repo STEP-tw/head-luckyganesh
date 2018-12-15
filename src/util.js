@@ -20,6 +20,10 @@ const createHeading = function(name) {
   return heading;
 };
 
+const isNumber = function(number){
+  return +number || number === 0 ;
+};
+
 const findOption = function(elem) {
   if (elem[0] != "-" || isFinite(elem.slice(1))) {
     return "n";
@@ -50,5 +54,6 @@ module.exports = {
   createHeading,
   findOption,
   findLength,
-  isFileName
+  isFileName,
+  isNumber
 };

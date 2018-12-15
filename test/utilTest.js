@@ -6,7 +6,8 @@ const {
   createHeading,
   findOption,
   findLength,
-  isFileName
+  isFileName,
+  isNumber
 } = require("../src/util.js");
 
 describe("getContent", () => {
@@ -91,5 +92,11 @@ describe("isFileName", function() {
     deepEqual(isFileName("5"), false);
     deepEqual(isFileName("-n5"), false);
     deepEqual(isFileName("-5"), false);
+  });
+});
+
+describe('isNumber', function() {
+  it('should return true for 0', function() {
+    deepEqual(isNumber(0),true);
   });
 });
