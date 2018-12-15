@@ -9,3 +9,11 @@
 -c|5|./data/words
 -c5|./data/words|./data/tenNumbers.txt
 -c|5|./data/words|./data/tenNumbers.txt
+-n|0|./data/tenNumbers.txt
+-c0|./data/tenNumbers.txt
+-n|5|vkdal
+-c|3|vkdal
+./data/words
+-n|11|./data/words
+-n5|./data/words|file
+-c5|./data/tenNumbers.txt|file

@@ -85,3 +85,40 @@ hello
 1
 2
 3
+head: illegal line count -- 0
+head: illegal byte count -- 0
+head: vkdal: No such file or directory
+head: vkdal: No such file or directory
+hello
+hi
+bye
+call
+me
+so
+far
+near
+read
+bool
+hello
+hi
+bye
+call
+me
+so
+far
+near
+read
+bool
+book
+==> ./data/words <==
+hello
+hi
+bye
+call
+me
+head: file: No such file or directory
+==> ./data/tenNumbers.txt <==
+1
+2
+3
+head: file: No such file or directory
