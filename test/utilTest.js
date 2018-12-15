@@ -99,4 +99,8 @@ describe('isNumber', function() {
   it('should return true for 0', function() {
     deepEqual(isNumber(0),true);
   });
+  it('should return true for any positve number', function() {
+    deepEqual(isNumber(1),true);
+    deepEqual(isNumber(10),true);
+  });
 });

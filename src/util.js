@@ -21,7 +21,7 @@ const createHeading = function(name) {
 };
 
 const isNumber = function(number){
-  return +number || number === 0 ;
+  return +number == number || number === 0 ;
 };
 
 const findOption = function(elem) {
