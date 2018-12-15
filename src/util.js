@@ -25,7 +25,7 @@ const isNumber = function(number){
 };
 
 const findOption = function(elem) {
-  if (elem[0] != "-" || isFinite(elem.slice(1))) {
+  if (elem[0] != "-" || isNumber(elem.slice(1))) {
     return "n";
   }
   return elem[1];
@@ -35,7 +35,7 @@ const findLength = function(options) {
   if (options[0][0] != "-") {
     return 10;
   }
-  if (isFinite(options[0])) {
+  if (isNumber(options[0])) {
     return options[0].slice(1);
   }
   if (options[0].slice(2) || options[0].slice(2) === 0) {
@@ -45,7 +45,7 @@ const findLength = function(options) {
 };
 
 const isFileName = function(fileName) {
-  return fileName[0] != "-" && !+fileName && fileName != 0;
+  return fileName[0] != "-" && !isNumber(fileName);
 };
 
 module.exports = {
