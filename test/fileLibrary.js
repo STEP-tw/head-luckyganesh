@@ -9,9 +9,15 @@ describe("fileStructure", () => {
     let expected = {fileName : "file" , contents : ""};
     expected.getLines = getContent.bind(expected,"\n");
     expected.getBytes = getContent.bind(expected,"");
-    actual = fileStructure("head","file");
+    let actual = fileStructure("head","file");
     deepEqual(actual.fileName,expected.fileName);
     deepEqual(actual.contents,expected.contents);
+  });
+  it('should create an empty fileStructure and testing inside function by adding contents', function() {
+    let actual = fileStructure("head","file");
+    actual.contents = "1\n2\n3\n4\n5\n6"
+    deepEqual(actual.getLines(4),"1\n2\n3\n4");
+    deepEqual(actual.getBytes(4),"1\n2\n");
   });
   it('should create an empty file structure for tail', () => {
     let expected = {fileName : "file" , contents : ""};
