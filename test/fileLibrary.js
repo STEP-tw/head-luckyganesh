@@ -26,5 +26,11 @@ describe("fileStructure", () => {
     actual = fileStructure("tail","file");
     deepEqual(actual.fileName,expected.fileName);
     deepEqual(actual.contents,expected.contents);
-  })
+  });
+  it('should create an empty fileStructure and testing inside function by adding contents', function() {
+    let actual = fileStructure("tail","file");
+    actual.contents = "1\n2\n3\n4\n5\n6"
+    deepEqual(actual.getLines(4),"3\n4\n5\n6");
+    deepEqual(actual.getBytes(4),"\n5\n6");
+  });
 });
