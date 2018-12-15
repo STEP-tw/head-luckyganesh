@@ -94,6 +94,9 @@ describe("checkingErrors", function() {
       "head: illegal line count -- 0"
     );
   });
+  it("shouldn't return any error for length 0 of type tail",() => {
+    deepEqual(checkingErrors({options:"n", length : 0},"tail"),"");
+  })
 });
 
 describe("getContentOfFiles", function() {
