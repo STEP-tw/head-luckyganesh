@@ -21,7 +21,7 @@ const createHeading = function(name) {
 };
 
 const findOption = function(elem) {
-  if (elem[0] != "-" || +elem.slice(1) || isFinite(elem.slice(1))) {
+  if (elem[0] != "-" || isFinite(elem.slice(1))) {
     return "n";
   }
   return elem[1];
