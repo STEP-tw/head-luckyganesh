@@ -35,6 +35,10 @@ describe("getContentOfTail", () => {
   it("should return n number of names", () => {
     deepEqual(getNames(",", 2), "good,bad");
   });
+  it('should return n number of names even there is empty space in last', () => {
+    file = {contents:"hello\nhi\nbye\ngood\nbad\n"}
+    deepEqual(getContentOfTail.bind(file)("\n",4),"hi\nbye\ngood\nbad");
+  })
 });
 
 describe("createHeading", function() {
