@@ -103,4 +103,12 @@ describe('isNumber', function() {
     deepEqual(isNumber(1),true);
     deepEqual(isNumber(10),true);
   });
+  it('should return true for negative numbers',() => {
+    deepEqual(isNumber(-1),true);
+  });
+  it('should return true for numbers even if the numbers in strings', () => {
+    deepEqual(isNumber('1'),true);
+    deepEqual(isNumber('0'),true);
+    deepEqual(isNumber('-1'),true);
+  });
 });
