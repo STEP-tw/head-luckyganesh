@@ -31,6 +31,13 @@ const findOption = function(elem) {
   return elem[1];
 };
 
+const isDefined = function(variable){
+  if(variable){
+    return true;
+  };
+  return variable === 0;
+};
+
 const findLength = function(options) {
   if (options[0][0] != "-") {
     return 10;
@@ -38,7 +45,7 @@ const findLength = function(options) {
   if (isNumber(options[0])) {
     return options[0].slice(1);
   }
-  if (options[0].slice(2) || options[0].slice(2) === 0) {
+  if (isDefined(options[0].slice(2))) {
     return options[0].slice(2);
   }
   return options[1];
