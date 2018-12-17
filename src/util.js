@@ -32,10 +32,7 @@ const findOption = function(elem) {
 };
 
 const isDefined = function(variable){
-  if(variable){
-    return true;
-  };
-  return variable === 0;
+  return variable !== "" && variable != undefined ;
 };
 
 const findLength = function(options) {
