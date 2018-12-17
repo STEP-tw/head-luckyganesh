@@ -62,5 +62,6 @@ module.exports = {
   findOption,
   findLength,
   isFileName,
-  isNumber
+  isNumber,
+  isDefined
 };

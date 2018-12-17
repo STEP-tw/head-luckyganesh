@@ -7,7 +7,8 @@ const {
   findOption,
   findLength,
   isFileName,
-  isNumber
+  isNumber,
+  isDefined
 } = require("../src/util.js");
 
 describe("getContent", () => {
@@ -110,5 +111,17 @@ describe('isNumber', function() {
     deepEqual(isNumber('1'),true);
     deepEqual(isNumber('0'),true);
     deepEqual(isNumber('-1'),true);
+  });
+});
+
+describe('isDefined', function() {
+  it('should return true for defined variable', function() {
+    deepEqual(isDefined(0),true);
+    deepEqual(isDefined("msg"),true);
+    deepEqual(isDefined([1,2,3]),true);
+  });
+  it('should return false for undefined variable', function() {
+    deepEqual(isDefined(),false);
+    deepEqual(isDefined(""),false);
   });
 });
