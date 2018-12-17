@@ -2,7 +2,7 @@ const isNumber = function(number) {
   return +number == number || number === 0;
 };
 
-const findOption = function(elem) {
+const getOption = function(elem) {
   if (elem[0] != "-" || isNumber(elem.slice(1))) {
     return "n";
   }
@@ -34,7 +34,7 @@ const isFilePath = function(filePath) {
 };
 
 const parseInputs = function(userInputs) {
-  let option = findOption(userInputs[0]);
+  let option = getOption(userInputs[0]);
   let length = getCount(userInputs.slice(0, 2));
   let files = userInputs.filter(isFilePath);
   return { option, length, files };
@@ -43,7 +43,7 @@ const parseInputs = function(userInputs) {
 module.exports = {
   parseInputs,
   getCount,
-  findOption,
+  getOption,
   isFilePath,
   isNumber,
   isDefined

@@ -2,23 +2,23 @@ const { deepEqual } = require("assert");
 
 const {
   parseInputs,
-  findOption,
+  getOption,
   getCount,
   isFilePath,
   isNumber,
   isDefined
 } = require("../src/parseInputs.js");
 
-describe("findOption", function() {
+describe("getOption", function() {
   it("should return default option n for name of file", function() {
-    deepEqual(findOption("file"), "n");
+    deepEqual(getOption("file"), "n");
   });
   it("should return exact option they given", function() {
-    deepEqual(findOption("-n"), "n");
-    deepEqual(findOption("-c"), "c");
+    deepEqual(getOption("-n"), "n");
+    deepEqual(getOption("-c"), "c");
   });
   it("should return default case for number", function() {
-    deepEqual(findOption("-5"), "n");
+    deepEqual(getOption("-5"), "n");
   });
 });
 
