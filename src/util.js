@@ -35,8 +35,8 @@ const isDefined = function(variable){
   return variable !== "" && variable != undefined ;
 };
 
-const findLength = function(options) {
-  let firstArg = options[0];
+const findLength = function(userArgs) {
+  let firstArg = userArgs[0];
   if (!firstArg.startsWith("-")) {
     return 10;
   }
@@ -48,7 +48,7 @@ const findLength = function(options) {
   if (isDefined(firstArg)) {
     return firstArg;
   }
-  return options[1];
+  return userArgs[1];
 };
 
 const isFileName = function(fileName) {
