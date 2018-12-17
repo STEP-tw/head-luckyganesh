@@ -39,14 +39,17 @@ const isDefined = function(variable){
 };
 
 const findLength = function(options) {
-  if (options[0][0] != "-") {
+  let firstArg = options[0];
+  if (!firstArg.startsWith("-")) {
     return 10;
   }
-  if (isNumber(options[0])) {
-    return options[0].slice(1);
+  firstArg = firstArg.slice(1);
+  if (isNumber(firstArg)) {
+    return firstArg;
   }
-  if (isDefined(options[0].slice(2))) {
-    return options[0].slice(2);
+  firstArg = firstArg.slice(1);
+  if (isDefined(firstArg)) {
+    return firstArg;
   }
   return options[1];
 };
