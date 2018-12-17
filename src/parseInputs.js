@@ -13,7 +13,7 @@ const isDefined = function(variable) {
   return variable !== "" && variable != undefined;
 };
 
-const findLength = function(userArgs) {
+const findCount = function(userArgs) {
   let firstArg = userArgs[0];
   if (!firstArg.startsWith("-")) {
     return 10;
@@ -35,14 +35,14 @@ const isFilePath = function(filePath) {
 
 const parseInputs = function(userInputs) {
   let option = findOption(userInputs[0]);
-  let length = findLength(userInputs.slice(0, 2));
+  let length = findCount(userInputs.slice(0, 2));
   let files = userInputs.filter(isFilePath);
   return { option, length, files };
 };
 
 module.exports = {
   parseInputs,
-  findLength,
+  findCount,
   findOption,
   isFilePath,
   isNumber,
