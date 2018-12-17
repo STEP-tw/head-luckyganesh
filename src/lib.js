@@ -13,19 +13,19 @@ const errorForExistsChecker = function(fileName,commandType){
   return  commandType + ": " + fileName + ": No such file or directory";
 }
 
-const errorForIllegalCount = function(option,length,commandType){
+const errorForIllegalCount = function(option,length,command){
   let options = { n:"line" , c:"byte" }
   let head = "head: illegal " + options[option] + " count -- "+length;
   let tail = "tail: illegal offset -- "+length;
-  let commandTypes = {head,tail};
-  return commandTypes[commandType];
+  let errorTypes = {head,tail};
+  return errorTypes[command];
 }
 
-const errorForIllegalOption = function(option,commandType){
+const errorForIllegalOption = function(option,command){
   let head = "head: illegal option -- " + option + "\nusage: head [-n lines | -c bytes] [file ...]";
   let tail = "tail: illegal option -- " + option + "\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
-  commandTypes = {head ,tail};
-  return commandTypes[commandType];
+  let errorTypes = {head ,tail};
+  return errorTypes[command];
 }
 
 const doesExists = function(checker, filePath) {
