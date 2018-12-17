@@ -4,7 +4,7 @@ const {
   doesExists,
   checkingErrors,
   getContentOfFiles,
-  errorForExistChecker,
+  errorForExistsChecker,
   errorForIllegalCount,
   errorForIllegalOption
 } = require("../src/lib.js");
@@ -160,7 +160,7 @@ describe("getContentOfFiles", function() {
 
 describe('error for Existchecker',function(){
   it('should give the format of error',function(){
-    deepEqual(errorForExistChecker('file',"head"),"head: file: No such file or directory");
+    deepEqual(errorForExistsChecker('file',"head"),"head: file: No such file or directory");
   });
 });
 

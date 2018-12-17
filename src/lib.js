@@ -9,7 +9,7 @@ const read = function(reader, encryption, filePath) {
   return reader(filePath, encryption);
 };
 
-const errorForExistChecker = function(fileName,type){
+const errorForExistsChecker = function(fileName,type){
   return  type + ": " + fileName + ": No such file or directory";
 }
 
@@ -64,7 +64,7 @@ const getContentOfFiles = function(
   const reader = fs.readFileSync;
   files = files.map(file => {
     if (!doesExists(existChecker, file.fileName)) {
-      file.contents = errorForExistChecker(file.fileName,type);
+      file.contents = errorForExistsChecker(file.fileName,type);
       return file;
     }
     let heading = createHeading(file.fileName) + "\n";
@@ -86,7 +86,7 @@ module.exports = {
   checkingErrors,
   doesExists,
   getContentOfFiles,
-  errorForExistChecker,
+  errorForExistsChecker,
   errorForIllegalCount,
   errorForIllegalOption
 };
