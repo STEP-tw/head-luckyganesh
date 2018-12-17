@@ -83,21 +83,21 @@ describe("isDefined", function() {
 describe("parseInputs", function() {
   it("should return all inputs as files", function() {
     deepEqual(parseInputs(["file1", "file2"]), {
-      options: "n",
+      option: "n",
       length: 10,
       files: ["file1", "file2"]
     });
   });
   it("should return the option and length with files", function() {
     deepEqual(parseInputs(["-n", "10", "file1", "file2"]), {
-      options: "n",
+      option: "n",
       length: 10,
       files: ["file1", "file2"]
     });
   });
   it("should return the option other than n", function() {
     deepEqual(parseInputs(["-c", "10", "file1", "file2"]), {
-      options: "c",
+      option: "c",
       length: 10,
       files: ["file1", "file2"]
     });

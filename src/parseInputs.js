@@ -34,10 +34,10 @@ const isFilePath = function(filePath) {
 };
 
 const parseInputs = function(userInputs) {
-  let options = findOption(userInputs[0]);
+  let option = findOption(userInputs[0]);
   let length = findLength(userInputs.slice(0, 2));
   let files = userInputs.filter(isFilePath);
-  return { options, length, files };
+  return { option, length, files };
 };
 
 module.exports = {

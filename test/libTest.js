@@ -1,5 +1,4 @@
 const {
-  parseInputs,
   read,
   doesExists,
   checkErrors,
@@ -10,6 +9,7 @@ const {
 } = require("../src/lib.js");
 
 const { fileStructure } = require("../src/fileLibrary.js");
+
 const { deepEqual } = require("assert");
 
 const checkExist = () => true;
@@ -52,26 +52,26 @@ describe("doesExists", function() {
 
 describe("checkErrors", function() {
   it("should return empty string", function() {
-    deepEqual(checkErrors({ options: "n", length: 10 },"head"), "");
+    deepEqual(checkErrors({ option: "n", length: 10 },"head"), "");
   });
   it("should return err msg for wrong options", function() {
     deepEqual(
-      checkErrors({ options: "p", length: 10 },"head"),
+      checkErrors({ option: "p", length: 10 },"head"),
       "head: illegal option -- p\nusage: head [-n lines | -c bytes] [file ...]"
     );
   });
   it("should return err msg for wrong length", function() {
     deepEqual(
-      checkErrors({ options: "c", length: 0 },"head"),
+      checkErrors({ option: "c", length: 0 },"head"),
       "head: illegal byte count -- 0"
     );
     deepEqual(
-      checkErrors({ options: "n", length: 0 },"head"),
+      checkErrors({ option: "n", length: 0 },"head"),
       "head: illegal line count -- 0"
     );
   });
   it("shouldn't return any error for length 0 of type tail",() => {
-    deepEqual(checkErrors({options:"n", length : 0},"tail"),"");
+    deepEqual(checkErrors({option:"n", length : 0},"tail"),"");
   })
 });
 

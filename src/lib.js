@@ -30,22 +30,22 @@ const doesExists = function(checker, filePath) {
 };
 
 const checkErrors = function(parsedInputs,commandType) {
-  let { options, length } = parsedInputs;
-  if (options != "n" && options != "c") {
-    return errorForIllegalOption(options,commandType)
+  let { option, length } = parsedInputs;
+  if (option != "n" && option != "c") {
+    return errorForIllegalOption(option,commandType)
   }
   if(length == 0 && commandType == "tail"){
     return "";
   }
   if (!(length > 0)) {
-    return errorForIllegalCount(options,length,commandType);
+    return errorForIllegalCount(option,length,commandType);
   }
   return "";
 };
 
 const getContentOfFiles = function(
   files,
-  options,
+  option,
   length,
   fs,
   commandType
@@ -62,7 +62,7 @@ const getContentOfFiles = function(
       heading = "";
     }
     let optionSelected = { n: "getLines", c: "getBytes" };
-    let commandFunc = file[optionSelected[options]];
+    let commandFunc = file[optionSelected[option]];
     file.contents = read(reader, "utf-8", file.fileName);
     file.contents = commandFunc(length);
     file.contents = heading + file.contents;
