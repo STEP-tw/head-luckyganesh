@@ -9,23 +9,23 @@ const read = function(reader, encryption, filePath) {
   return reader(filePath, encryption);
 };
 
-const errorForExistsChecker = function(fileName,type){
-  return  type + ": " + fileName + ": No such file or directory";
+const errorForExistsChecker = function(fileName,commandType){
+  return  commandType + ": " + fileName + ": No such file or directory";
 }
 
-const errorForIllegalCount = function(option,length,type){
+const errorForIllegalCount = function(option,length,commandType){
   let options = { n:"line" , c:"byte" }
   let head = "head: illegal " + options[option] + " count -- "+length;
   let tail = "tail: illegal offset -- "+length;
-  let types = {head,tail};
-  return types[type];
+  let commandTypes = {head,tail};
+  return commandTypes[commandType];
 }
 
-const errorForIllegalOption = function(option,type){
+const errorForIllegalOption = function(option,commandType){
   let head = "head: illegal option -- " + option + "\nusage: head [-n lines | -c bytes] [file ...]";
   let tail = "tail: illegal option -- " + option + "\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
-  types = {head ,tail};
-  return types[type];
+  commandTypes = {head ,tail};
+  return commandTypes[commandType];
 }
 
 const doesExists = function(checker, filePath) {
@@ -39,16 +39,16 @@ const parseInputs = function(userInputs) {
   return { options, length, files };
 };
 
-const checkErrors = function(parsedInputs,type) {
+const checkErrors = function(parsedInputs,commandType) {
   let { options, length } = parsedInputs;
   if (options != "n" && options != "c") {
-    return errorForIllegalOption(options,type)
+    return errorForIllegalOption(options,commandType)
   }
-  if(length == 0 && type == "tail"){
+  if(length == 0 && commandType == "tail"){
     return "";
   }
   if (!(length > 0)) {
-    return errorForIllegalCount(options,length,type);
+    return errorForIllegalCount(options,length,commandType);
   }
   return "";
 };
@@ -58,13 +58,13 @@ const getContentOfFiles = function(
   options,
   length,
   fs,
-  type
+  commandType
 ) {
   const existChecker = fs.existsSync;
   const reader = fs.readFileSync;
   files = files.map(file => {
     if (!doesExists(existChecker, file.fileName)) {
-      file.contents = errorForExistsChecker(file.fileName,type);
+      file.contents = errorForExistsChecker(file.fileName,commandType);
       return file;
     }
     let heading = createHeading(file.fileName) + "\n";
