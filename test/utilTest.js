@@ -2,7 +2,7 @@ const { deepEqual } = require("assert");
 
 const {
   getContentFromTop,
-  getContentOfTail,
+  getContentFromBottom,
   createHeading,
   findOption,
   findLength,
@@ -25,9 +25,9 @@ describe("getContentFromTop", () => {
   });
 });
 
-describe("getContentOfTail", () => {
+describe("getContentFromBottom", () => {
   let file = { contents: "hello,hi,bye,good,bad" };
-  let getNames = getContentOfTail.bind(file);
+  let getNames = getContentFromBottom.bind(file);
   it("should return empty string", () => {
     deepEqual(getNames(",", 0), "");
   });
@@ -39,7 +39,7 @@ describe("getContentOfTail", () => {
   });
   it('should return n number of names even there is empty space in last', () => {
     file = {contents:"hello\nhi\nbye\ngood\nbad\n"}
-    deepEqual(getContentOfTail.bind(file)("\n",4),"hi\nbye\ngood\nbad");
+    deepEqual(getContentFromBottom.bind(file)("\n",4),"hi\nbye\ngood\nbad");
   })
 });
 
