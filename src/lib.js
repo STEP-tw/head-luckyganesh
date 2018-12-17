@@ -64,7 +64,7 @@ const getContentOfFiles = function(
     let optionSelected = { n: "getLines", c: "getBytes" };
     let commandFunc = file[optionSelected[option]];
     file.contents = read(reader, "utf-8", file.fileName);
-    file.contents = commandFunc(count);
+    file.contents = commandFunc(file.contents,count);
     file.contents = heading + file.contents;
     return file;
   });

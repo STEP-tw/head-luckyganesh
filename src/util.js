@@ -1,13 +1,13 @@
-const getContentFromTop = function(separator, length) {
-  result = this.contents.split(separator);
+const getContentFromTop = function(separator,content, length) {
+  let result = content.split(separator);
   return result
     .slice(0, length)
     .filter(line => line != "")
     .join(separator);
 };
 
-const getContentFromBottom = function(separator, length) {
-  result = this.contents.split(separator).reverse();
+const getContentFromBottom = function(separator, content, length) {
+  let result = content.split(separator).reverse();
   if(result[0] === ""){
     result = result.slice(1);
   }

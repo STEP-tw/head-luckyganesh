@@ -7,34 +7,32 @@ const {
 } = require("../src/util.js");
 
 describe("getContentFromTop", () => {
-  let file = { contents: "hello,hi,bye,good,bad" };
-  let getNames = getContentFromTop.bind(file);
+  let file = "hello,hi,bye,good,bad"
   it("should return empty string", () => {
-    deepEqual(getNames(",", 0), "");
+    deepEqual(getContentFromTop(",",file, 0), "");
   });
   it("should return one name", () => {
-    deepEqual(getNames(",", 1), "hello");
+    deepEqual(getContentFromTop(",",file, 1), "hello");
   });
   it("should return n number of names", () => {
-    deepEqual(getNames(",", 2), "hello,hi");
+    deepEqual(getContentFromTop(",",file, 2), "hello,hi");
   });
 });
 
 describe("getContentFromBottom", () => {
-  let file = { contents: "hello,hi,bye,good,bad" };
-  let getNames = getContentFromBottom.bind(file);
+  let file = "hello,hi,bye,good,bad";
   it("should return empty string", () => {
-    deepEqual(getNames(",", 0), "");
+    deepEqual(getContentFromBottom(",",file, 0), "");
   });
   it("should return one name", () => {
-    deepEqual(getNames(",", 1), "bad");
+    deepEqual(getContentFromBottom(",",file, 1), "bad");
   });
   it("should return n number of names", () => {
-    deepEqual(getNames(",", 2), "good,bad");
+    deepEqual(getContentFromBottom(",",file, 2), "good,bad");
   });
   it('should return n number of names even there is empty space in last', () => {
-    file = {contents:"hello\nhi\nbye\ngood\nbad\n"}
-    deepEqual(getContentFromBottom.bind(file)("\n",4),"hi\nbye\ngood\nbad");
+    file = "hello\nhi\nbye\ngood\nbad\n"
+    deepEqual(getContentFromBottom("\n",file,4),"hi\nbye\ngood\nbad");
   })
 });
 
