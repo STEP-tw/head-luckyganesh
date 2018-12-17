@@ -1,18 +1,18 @@
 const getContentFromTop = function(separator, length) {
-  content = this.contents.split(separator);
-  return content
+  result = this.contents.split(separator);
+  return result
     .slice(0, length)
     .filter(line => line != "")
     .join(separator);
 };
 
 const getContentFromBottom = function(separator, length) {
-  content = this.contents.split(separator).reverse();
-  if(content[0] === ""){
-    content = content.slice(1);
+  result = this.contents.split(separator).reverse();
+  if(result[0] === ""){
+    result = result.slice(1);
   }
-  content = content.slice(0,length).reverse();
-  return content.join(separator);
+  result = result.slice(0,length).reverse();
+  return result.join(separator);
 };
 
 const createHeading = function(name) {
