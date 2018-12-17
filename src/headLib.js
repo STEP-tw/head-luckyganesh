@@ -1,6 +1,8 @@
 const { fileStructure } = require("./fileLibrary");
 
-const { getContentOfFiles, parseInputs, checkErrors } = require("./lib.js");
+const { getContentOfFiles, checkErrors } = require("./lib.js");
+
+const { parseInputs } = require('./parseInputs.js');
 
 const head = function(parsedInputs, fs, commandType) {
   let { options, length, files } = parsedInputs;

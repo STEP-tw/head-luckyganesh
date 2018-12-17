@@ -1,8 +1,5 @@
 const {
   createHeading,
-  findOption,
-  findLength,
-  isFilePath
 } = require("./util.js");
 
 const read = function(reader, encryption, filePath) {
@@ -30,13 +27,6 @@ const errorForIllegalOption = function(option,command){
 
 const doesExists = function(checker, filePath) {
   return checker(filePath);
-};
-
-const parseInputs = function(userInputs) {
-  let options = findOption(userInputs[0]);
-  let length = findLength(userInputs.slice(0, 2));
-  let files = userInputs.filter(isFilePath);
-  return { options, length, files };
 };
 
 const checkErrors = function(parsedInputs,commandType) {
@@ -82,7 +72,6 @@ const getContentOfFiles = function(
 };
 
 module.exports = {
-  parseInputs,
   read,
   checkErrors,
   doesExists,

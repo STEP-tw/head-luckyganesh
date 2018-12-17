@@ -29,30 +29,6 @@ let readCharacter = function(name) {
   return "hello";
 };
 
-describe("parseInputs", function() {
-  it("should return all inputs as files", function() {
-    deepEqual(parseInputs(["file1", "file2"]), {
-      options: "n",
-      length: 10,
-      files: ["file1", "file2"]
-    });
-  });
-  it("should return the option and length with files", function() {
-    deepEqual(parseInputs(["-n", "10", "file1", "file2"]), {
-      options: "n",
-      length: 10,
-      files: ["file1", "file2"]
-    });
-  });
-  it("should return the option other than n", function() {
-    deepEqual(parseInputs(["-c", "10", "file1", "file2"]), {
-      options: "c",
-      length: 10,
-      files: ["file1", "file2"]
-    });
-  });
-});
-
 describe("read", function() {
   it("should return a line", function() {
     deepEqual(
