@@ -30,7 +30,7 @@ const errorForIllegalOption = function(option,type){
   return types[type];
 }
 
-const isExists = function(checker, filePath) {
+const doesExists = function(checker, filePath) {
   return checker(filePath);
 };
 
@@ -65,7 +65,7 @@ const getContentOfFiles = function(
   const existChecker = fs.existsSync;
   const reader = fs.readFileSync;
   files = files.map(file => {
-    if (!isExists(existChecker, file.fileName)) {
+    if (!doesExists(existChecker, file.fileName)) {
       file.contents = errorForExistChecker(file.fileName,type);
       return file;
     }
@@ -86,7 +86,7 @@ module.exports = {
   parseInputs,
   read,
   checkingErrors,
-  isExists,
+  doesExists,
   checkingErrors,
   getContentOfFiles,
   errorForExistChecker,

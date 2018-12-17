@@ -1,7 +1,7 @@
 const {
   parseInputs,
   read,
-  isExists,
+  doesExists,
   checkingErrors,
   getContentOfFiles,
   errorForExistChecker,
@@ -65,12 +65,12 @@ describe("read", function() {
   });
 });
 
-describe("isExists", function() {
+describe("doesExists", function() {
   it("should return the file exists", function() {
-    deepEqual(isExists(checkExist, "file"), true);
+    deepEqual(doesExists(checkExist, "file"), true);
   });
   it("should return false for file not existance", function() {
-    deepEqual(isExists(checkNotExist, "temp"), false);
+    deepEqual(doesExists(checkNotExist, "temp"), false);
   });
 });
 

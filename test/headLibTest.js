@@ -27,14 +27,14 @@ describe("runHead", function() {
   it("should work for default condition", function() {
     const fs = { readFileSync: readLine, existsSync: checkExist };
     deepEqual(
-      runHead(["file1"], fs, "head"),
+      runHead(["file"], fs, "head"),
       "line1\nline2\nline3\nline4\nline5"
     );
   });
   it("should work to give n lines ", function() {
     const fs = { readFileSync: readLine, existsSync: checkExist };
-    deepEqual(runHead(["-n3", "file1"], fs, "head"), "line1\nline2\nline3");
-    deepEqual(runHead(["-n1", "file1"], fs, "head"), "line1");
+    deepEqual(runHead(["-n3", "file"], fs, "head"), "line1\nline2\nline3");
+    deepEqual(runHead(["-n1", "file"], fs, "head"), "line1");
   });
   it("should work to give n bytes", function() {
     const fs = { readFileSync: readCharacter, existsSync: checkExist };
