@@ -1,4 +1,4 @@
-const getContent = function(separator, length) {
+const getContentFromTop = function(separator, length) {
   content = this.contents.split(separator);
   return content
     .slice(0, length)
@@ -56,7 +56,7 @@ const isFileName = function(fileName) {
 };
 
 module.exports = {
-  getContent,
+  getContentFromTop,
   getContentOfTail,
   createHeading,
   findOption,

@@ -2,13 +2,13 @@ const { deepEqual } = require("assert");
 
 const { fileStructure } = require("../src/fileLibrary.js");
 
-const { getContent , getContentOfTail} = require('../src/util.js')
+const { getContentFromTop , getContentOfTail} = require('../src/util.js')
 
 describe("fileStructure", () => {
   it("should create an empty file structure for  head", () => {
     let expected = {fileName : "file" , contents : ""};
-    expected.getLines = getContent.bind(expected,"\n");
-    expected.getBytes = getContent.bind(expected,"");
+    expected.getLines = getContentFromTop.bind(expected,"\n");
+    expected.getBytes = getContentFromTop.bind(expected,"");
     let actual = fileStructure("head","file");
     deepEqual(actual.fileName,expected.fileName);
     deepEqual(actual.contents,expected.contents);

@@ -1,7 +1,7 @@
-const { getContent , getContentOfTail } = require("./util.js");
+const { getContentFromTop , getContentOfTail } = require("./util.js");
 
 const fileStructure = function(commandType,fileName) {
-  commandTypes = { head :getContent , tail:getContentOfTail };
+  commandTypes = { head :getContentFromTop , tail:getContentOfTail };
   let file = { fileName, contents: "" };
   file.getLines = commandTypes[commandType].bind(file, "\n");
   file.getBytes = commandTypes[commandType].bind(file, "");

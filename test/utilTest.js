@@ -1,7 +1,7 @@
 const { deepEqual } = require("assert");
 
 const {
-  getContent,
+  getContentFromTop,
   getContentOfTail,
   createHeading,
   findOption,
@@ -11,9 +11,9 @@ const {
   isDefined
 } = require("../src/util.js");
 
-describe("getContent", () => {
+describe("getContentFromTop", () => {
   let file = { contents: "hello,hi,bye,good,bad" };
-  let getNames = getContent.bind(file);
+  let getNames = getContentFromTop.bind(file);
   it("should return empty string", () => {
     deepEqual(getNames(",", 0), "");
   });
