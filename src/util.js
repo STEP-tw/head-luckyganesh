@@ -51,8 +51,8 @@ const findLength = function(userArgs) {
   return userArgs[1];
 };
 
-const isFileName = function(fileName) {
-  return fileName[0] != "-" && !isNumber(fileName);
+const isFilePath = function(filePath) {
+  return filePath[0] != "-" && !isNumber(filePath);
 };
 
 module.exports = {
@@ -61,7 +61,7 @@ module.exports = {
   createHeading,
   findOption,
   findLength,
-  isFileName,
+  isFilePath,
   isNumber,
   isDefined
 };

@@ -6,7 +6,7 @@ const {
   createHeading,
   findOption,
   findLength,
-  isFileName,
+  isFilePath,
   isNumber,
   isDefined
 } = require("../src/util.js");
@@ -85,14 +85,14 @@ describe("findLength", function() {
   });
 });
 
-describe("isFileName", function() {
+describe("isFilePath", function() {
   it("should tell the truth for name", function() {
-    deepEqual(isFileName("file"), true);
+    deepEqual(isFilePath("file"), true);
   });
   it("should tell the false for not a name", function() {
-    deepEqual(isFileName("5"), false);
-    deepEqual(isFileName("-n5"), false);
-    deepEqual(isFileName("-5"), false);
+    deepEqual(isFilePath("5"), false);
+    deepEqual(isFilePath("-n5"), false);
+    deepEqual(isFilePath("-5"), false);
   });
 });
 
