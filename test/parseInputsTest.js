@@ -3,7 +3,7 @@ const { deepEqual } = require("assert");
 const {
   parseInputs,
   findOption,
-  findCount,
+  getCount,
   isFilePath,
   isNumber,
   isDefined
@@ -22,20 +22,20 @@ describe("findOption", function() {
   });
 });
 
-describe("findCount", function() {
+describe("getCount", function() {
   it("should return default length n for name of file", function() {
-    deepEqual(findCount(["file", "file2"]), 10);
+    deepEqual(getCount(["file", "file2"]), 10);
   });
   it("should return exact length they given", function() {
-    deepEqual(findCount(["-n", "8"]), 8);
-    deepEqual(findCount(["-c", "3"]), 3);
+    deepEqual(getCount(["-n", "8"]), 8);
+    deepEqual(getCount(["-c", "3"]), 3);
   });
   it("should return length even if it is included in option", function() {
-    deepEqual(findCount(["-n5", "79"]), 5);
-    deepEqual(findCount(["-c56", "file"]), 56);
+    deepEqual(getCount(["-n5", "79"]), 5);
+    deepEqual(getCount(["-c56", "file"]), 56);
   });
   it("should return default case for number", function() {
-    deepEqual(findCount(["-5", "file"]), 5);
+    deepEqual(getCount(["-5", "file"]), 5);
   });
 });
 
