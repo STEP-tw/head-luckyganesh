@@ -23,14 +23,14 @@ describe("getOption", function() {
 });
 
 describe("getCount", function() {
-  it("should return default length n for name of file", function() {
+  it("should return default count n for name of file", function() {
     deepEqual(getCount(["file", "file2"]), 10);
   });
-  it("should return exact length they given", function() {
+  it("should return exact count they given", function() {
     deepEqual(getCount(["-n", "8"]), 8);
     deepEqual(getCount(["-c", "3"]), 3);
   });
-  it("should return length even if it is included in option", function() {
+  it("should return count even if it is included in option", function() {
     deepEqual(getCount(["-n5", "79"]), 5);
     deepEqual(getCount(["-c56", "file"]), 56);
   });
@@ -84,21 +84,21 @@ describe("parseInputs", function() {
   it("should return all inputs as files", function() {
     deepEqual(parseInputs(["file1", "file2"]), {
       option: "n",
-      length: 10,
+      count: 10,
       files: ["file1", "file2"]
     });
   });
-  it("should return the option and length with files", function() {
+  it("should return the option and count with files", function() {
     deepEqual(parseInputs(["-n", "10", "file1", "file2"]), {
       option: "n",
-      length: 10,
+      count: 10,
       files: ["file1", "file2"]
     });
   });
   it("should return the option other than n", function() {
     deepEqual(parseInputs(["-c", "10", "file1", "file2"]), {
       option: "c",
-      length: 10,
+      count: 10,
       files: ["file1", "file2"]
     });
   });

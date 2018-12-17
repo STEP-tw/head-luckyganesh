@@ -35,9 +35,9 @@ const isFilePath = function(filePath) {
 
 const parseInputs = function(userInputs) {
   let option = getOption(userInputs[0]);
-  let length = getCount(userInputs.slice(0, 2));
+  let count = getCount(userInputs.slice(0, 2));
   let files = userInputs.filter(isFilePath);
-  return { option, length, files };
+  return { option, count, files };
 };
 
 module.exports = {

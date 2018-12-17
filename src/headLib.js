@@ -5,9 +5,9 @@ const { getContentOfFiles, checkErrors } = require("./lib.js");
 const { parseInputs } = require('./parseInputs.js');
 
 const head = function(parsedInputs, fs, commandType) {
-  let { option, length, files } = parsedInputs;
+  let { option, count, files } = parsedInputs;
   files = files.map(fileStructure.bind(null, commandType));
-  files = getContentOfFiles(files, option, length, fs, commandType);
+  files = getContentOfFiles(files, option, count, fs, commandType);
   return files.map(file => file.contents).join("\n");
 };
 

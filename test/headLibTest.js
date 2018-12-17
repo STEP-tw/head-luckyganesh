@@ -5,7 +5,7 @@ const { readLine, readCharacter, checkExist } = require("./libTest.js");
 describe("head", function() {
   it("should work for default condition", function() {
     const fs = { readFileSync: readLine, existsSync: checkExist };
-    let userInputs = { option: "n", length: 10, files: ["file"] };
+    let userInputs = { option: "n", count: 10, files: ["file"] };
     deepEqual(
       head(userInputs, fs, "head"),
       "line1\nline2\nline3\nline4\nline5"
@@ -13,12 +13,12 @@ describe("head", function() {
   });
   it("should work for default character condition", function() {
     const fs = { readFileSync: readCharacter, existsSync: checkExist };
-    let userInputs = { option: "c", length: 1, files: ["file"] };
+    let userInputs = { option: "c", count: 1, files: ["file"] };
     deepEqual(head(userInputs, fs, "head"), "h");
   });
   it("should work for default character condition", function() {
     const fs = { readFileSync: readCharacter, existsSync: checkExist };
-    let userInputs = { option: "c", length: 1, files: ["file", "file"] };
+    let userInputs = { option: "c", count: 1, files: ["file", "file"] };
     deepEqual(head(userInputs, fs, "head"), "==> file <==\nh\n==> file <==\nh");
   });
 });

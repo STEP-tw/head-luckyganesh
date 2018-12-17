@@ -52,26 +52,26 @@ describe("doesExists", function() {
 
 describe("checkErrors", function() {
   it("should return empty string", function() {
-    deepEqual(checkErrors({ option: "n", length: 10 },"head"), "");
+    deepEqual(checkErrors({ option: "n", count: 10 },"head"), "");
   });
   it("should return err msg for wrong options", function() {
     deepEqual(
-      checkErrors({ option: "p", length: 10 },"head"),
+      checkErrors({ option: "p", count: 10 },"head"),
       "head: illegal option -- p\nusage: head [-n lines | -c bytes] [file ...]"
     );
   });
-  it("should return err msg for wrong length", function() {
+  it("should return err msg for wrong count", function() {
     deepEqual(
-      checkErrors({ option: "c", length: 0 },"head"),
+      checkErrors({ option: "c", count: 0 },"head"),
       "head: illegal byte count -- 0"
     );
     deepEqual(
-      checkErrors({ option: "n", length: 0 },"head"),
+      checkErrors({ option: "n", count: 0 },"head"),
       "head: illegal line count -- 0"
     );
   });
-  it("shouldn't return any error for length 0 of type tail",() => {
-    deepEqual(checkErrors({option:"n", length : 0},"tail"),"");
+  it("shouldn't return any error for count 0 of type tail",() => {
+    deepEqual(checkErrors({option:"n", count : 0},"tail"),"");
   })
 });
 
