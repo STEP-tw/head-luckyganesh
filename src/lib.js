@@ -39,7 +39,7 @@ const parseInputs = function(userInputs) {
   return { options, length, files };
 };
 
-const checkingErrors = function(parsedInputs,type) {
+const checkErrors = function(parsedInputs,type) {
   let { options, length } = parsedInputs;
   if (options != "n" && options != "c") {
     return errorForIllegalOption(options,type)
@@ -83,7 +83,7 @@ const getContentOfFiles = function(
 module.exports = {
   parseInputs,
   read,
-  checkingErrors,
+  checkErrors,
   doesExists,
   getContentOfFiles,
   errorForExistsChecker,

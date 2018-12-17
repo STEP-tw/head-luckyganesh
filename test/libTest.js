@@ -2,7 +2,7 @@ const {
   parseInputs,
   read,
   doesExists,
-  checkingErrors,
+  checkErrors,
   getContentOfFiles,
   errorForExistsChecker,
   errorForIllegalCount,
@@ -74,28 +74,28 @@ describe("doesExists", function() {
   });
 });
 
-describe("checkingErrors", function() {
+describe("checkErrors", function() {
   it("should return empty string", function() {
-    deepEqual(checkingErrors({ options: "n", length: 10 },"head"), "");
+    deepEqual(checkErrors({ options: "n", length: 10 },"head"), "");
   });
   it("should return err msg for wrong options", function() {
     deepEqual(
-      checkingErrors({ options: "p", length: 10 },"head"),
+      checkErrors({ options: "p", length: 10 },"head"),
       "head: illegal option -- p\nusage: head [-n lines | -c bytes] [file ...]"
     );
   });
   it("should return err msg for wrong length", function() {
     deepEqual(
-      checkingErrors({ options: "c", length: 0 },"head"),
+      checkErrors({ options: "c", length: 0 },"head"),
       "head: illegal byte count -- 0"
     );
     deepEqual(
-      checkingErrors({ options: "n", length: 0 },"head"),
+      checkErrors({ options: "n", length: 0 },"head"),
       "head: illegal line count -- 0"
     );
   });
   it("shouldn't return any error for length 0 of type tail",() => {
-    deepEqual(checkingErrors({options:"n", length : 0},"tail"),"");
+    deepEqual(checkErrors({options:"n", length : 0},"tail"),"");
   })
 });
 
@@ -160,7 +160,8 @@ describe("getContentOfFiles", function() {
 
 describe('error for Existchecker',function(){
   it('should give the format of error',function(){
-    deepEqual(errorForExistsChecker('file',"head"),"head: file: No such file or directory");
+    deepEqual(errorForExistsChecker
+      ('file',"head"),"head: file: No such file or directory");
   });
 });
 

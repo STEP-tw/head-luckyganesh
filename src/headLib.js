@@ -1,6 +1,6 @@
 const { fileStructure } = require("./fileLibrary");
 
-const { getContentOfFiles, parseInputs, checkingErrors } = require("./lib.js");
+const { getContentOfFiles, parseInputs, checkErrors } = require("./lib.js");
 
 const head = function(parsedInputs, fs, type) {
   let { options, length, files } = parsedInputs;
@@ -11,7 +11,7 @@ const head = function(parsedInputs, fs, type) {
 
 const runHead = function(userInputs, fs, type) {
   let parsedInputs = parseInputs(userInputs);
-  let err = checkingErrors(parsedInputs,type);
+  let err = checkErrors(parsedInputs,type);
   return err || head(parsedInputs, fs, type);
 };
 module.exports = { head, runHead };
