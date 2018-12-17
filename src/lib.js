@@ -5,8 +5,6 @@ const {
   isFileName
 } = require("./util.js");
 
-const { fileStructure } = require("./fileLibrary.js");
-
 const read = function(reader, encryption, filePath) {
   return reader(filePath, encryption);
 };
@@ -87,7 +85,6 @@ module.exports = {
   read,
   checkingErrors,
   doesExists,
-  checkingErrors,
   getContentOfFiles,
   errorForExistChecker,
   errorForIllegalCount,
