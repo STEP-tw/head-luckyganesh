@@ -23,7 +23,7 @@ describe("fileStructure", () => {
     let expected = {fileName : "file" , contents : ""};
     expected.getLines = getContentFromBottom.bind(expected,"\n");
     expected.getBytes = getContentFromBottom.bind(expected,"");
-    actual = fileStructure("tail","file");
+    let actual = fileStructure("tail","file");
     deepEqual(actual.fileName,expected.fileName);
     deepEqual(actual.contents,expected.contents);
   });
