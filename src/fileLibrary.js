@@ -1,10 +1,10 @@
 const { getContentFromTop , getContentFromBottom } = require("./util.js");
 
-const fileStructure = function(commandType,fileName) {
-  commandTypes = { head :getContentFromTop , tail:getContentFromBottom };
+const fileStructure = function(coreUtil,fileName) {
+  const commandTypes = { head :getContentFromTop , tail:getContentFromBottom };
   let file = { fileName, contents: "" };
-  file.getLines = commandTypes[commandType].bind(null, "\n");
-  file.getBytes = commandTypes[commandType].bind(null, "");
+  file.getLines = commandTypes[coreUtil].bind(null, "\n");
+  file.getBytes = commandTypes[coreUtil].bind(null, "");
   return file;
 };
 
