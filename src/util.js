@@ -6,12 +6,14 @@ const getContentFromTop = function(delimeter,content, length) {
 };
 
 const getContentFromBottom = function(delimeter, content, length) {
-  let result = content.split(delimeter).reverse();
+  const result = content.split(delimeter).reverse();
   if(result[0] === ""){
-    result = result.slice(1);
+    return result.slice(1,+length+1).reverse().join(delimeter);
   }
-  result = result.slice(0,length).reverse();
-  return result.join(delimeter);
+  return result
+    .slice(0,length)
+    .reverse()
+    .join(delimeter);
 };
 
 const createHeading = function(name) {
