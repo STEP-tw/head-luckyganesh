@@ -1,7 +1,7 @@
 const getContentFromTop = function(delimeter,content, length) {
-  let result = content.split(delimeter);
-  return result
-    .slice(0, length)
+  return content
+    .split(delimeter)
+    .slice(0,length)
     .join(delimeter);
 };
 
