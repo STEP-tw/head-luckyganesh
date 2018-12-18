@@ -122,3 +122,5 @@ head: file: No such file or directory
 2
 3
 head: file: No such file or directory
+head: illegal option -- p
+usage: head [-n lines   -c bytes] [file ...]

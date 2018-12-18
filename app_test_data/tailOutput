@@ -1,0 +1,126 @@
+far
+near
+read
+bool
+book
+far
+near
+read
+bool
+book
+far
+near
+read
+bool
+book
+==> ./data/words <==
+hi
+bye
+call
+me
+so
+far
+near
+read
+bool
+book
+==> ./data/tenNumbers.txt <==
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+==> ./data/words <==
+far
+near
+read
+bool
+book
+==> ./data/tenNumbers.txt <==
+6
+7
+8
+9
+10
+==> ./data/words <==
+far
+near
+read
+bool
+book
+==> ./data/tenNumbers.txt <==
+6
+7
+8
+9
+10
+==> ./data/words <==
+far
+near
+read
+bool
+book
+==> ./data/tenNumbers.txt <==
+6
+7
+8
+9
+10
+book
+book
+==> ./data/words <==
+book
+
+==> ./data/tenNumbers.txt <==
+9
+10
+==> ./data/words <==
+book
+
+==> ./data/tenNumbers.txt <==
+9
+10
+
+
+tail: vkdal: No such file or directory
+tail: vkdal: No such file or directory
+hi
+bye
+call
+me
+so
+far
+near
+read
+bool
+book
+hello
+hi
+bye
+call
+me
+so
+far
+near
+read
+bool
+book
+==> ./data/words <==
+far
+near
+read
+bool
+book
+tail: file: No such file or directory
+==> ./data/tenNumbers.txt <==
+9
+10
+
+tail: file: No such file or directory
+tail: illegal option -- p
+usage: tail [-F   -f   -r] [-q] [-b #   -c #   -n #] [file ...]

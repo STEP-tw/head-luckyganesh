@@ -2,7 +2,6 @@ const getContentFromTop = function(separator,content, length) {
   let result = content.split(separator);
   return result
     .slice(0, length)
-    .filter(line => line != "")
     .join(separator);
 };
 

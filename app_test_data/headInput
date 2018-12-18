@@ -17,3 +17,4 @@
 -n|11|./data/words
 -n5|./data/words|file
 -c5|./data/tenNumbers.txt|file
+-p5|./data/words
