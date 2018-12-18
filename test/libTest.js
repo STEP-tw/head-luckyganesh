@@ -5,7 +5,9 @@ const {
   getContentOfFiles,
   errorForExistsChecker,
   errorForIllegalCount,
-  errorForIllegalOption
+  errorForIllegalOption,
+  command,
+  runCommand
 } = require("../src/lib.js");
 
 const { fileStructure } = require("../src/fileLibrary.js");
@@ -160,4 +162,48 @@ describe('errorForIllegalOption', function() {
     deepEqual(errorForIllegalOption("k","tail"),"tail: illegal option -- k\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]")
   });
 });
-module.exports = { readCharacter , readLine , checkExist }
+
+describe("command", function() {
+  it("should work for default condition", function() {
+    const fs = { readFileSync: readLine, existsSync: checkExist };
+    let userInputs = { option: "n", count: 10, files: ["file"] };
+    deepEqual(
+      command(userInputs, fs, "head"),
+      "line1\nline2\nline3\nline4\nline5"
+    );
+  });
+  it("should work for default character condition", function() {
+    const fs = { readFileSync: readCharacter, existsSync: checkExist };
+    let userInputs = { option: "c", count: 1, files: ["file"] };
+    deepEqual(command(userInputs, fs, "head"), "h");
+  });
+  it("should work for default character condition", function() {
+    const fs = { readFileSync: readCharacter, existsSync: checkExist };
+    let userInputs = { option: "c", count: 1, files: ["file", "file"] };
+    deepEqual(command(userInputs, fs, "head"), "==> file <==\nh\n==> file <==\nh");
+  });
+});
+
+describe("runCommand", function() {
+  it("should work for default condition", function() {
+    const fs = { readFileSync: readLine, existsSync: checkExist };
+    deepEqual(
+      runCommand(["file"], fs, "head"),
+      "line1\nline2\nline3\nline4\nline5"
+    );
+  });
+  it("should work to give n lines ", function() {
+    const fs = { readFileSync: readLine, existsSync: checkExist };
+    deepEqual(runCommand(["-n3", "file"], fs, "head"), "line1\nline2\nline3");
+    deepEqual(runCommand(["-n1", "file"], fs, "head"), "line1");
+  });
+  it("should work to give n bytes", function() {
+    const fs = { readFileSync: readCharacter, existsSync: checkExist };
+    deepEqual(runCommand(["-c2", "file"], fs, "head"), "he");
+    deepEqual(runCommand(["-c3", "file"], fs, "head"), "hel");
+  });
+  it("should return 2 lines from end", function() {
+    const fs = { readFileSync: readLine, existsSync: checkExist };
+    deepEqual(runCommand(["-n2", "file1"], fs, "tail"), "line4\nline5");
+  });
+});

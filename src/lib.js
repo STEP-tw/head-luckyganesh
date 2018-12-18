@@ -1,6 +1,8 @@
-const {
-  createHeading,
-} = require("./util.js");
+const { createHeading } = require("./util.js");
+
+const { fileStructure } = require("./fileLibrary");
+
+const { parseInputs } = require('./parseInputs.js');
 
 const read = function(reader, encryption, filePath) {
   return reader(filePath, encryption);
@@ -19,8 +21,12 @@ const errorForIllegalCount = function(option,length,command){
 }
 
 const errorForIllegalOption = function(option,command){
-  let head = "head: illegal option -- " + option + "\nusage: head [-n lines | -c bytes] [file ...]";
-  let tail = "tail: illegal option -- " + option + "\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
+  let head = "head: illegal option -- " + 
+              option +
+             "\nusage: head [-n lines | -c bytes] [file ...]";
+  let tail = "tail: illegal option -- " +
+              option +
+              "\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]";
   let errorTypes = {head ,tail};
   return errorTypes[command];
 }
@@ -71,6 +77,19 @@ const getContentOfFiles = function(
   return files;
 };
 
+const command = function(parsedInputs, fs, commandType) {
+  let { option, count, files } = parsedInputs;
+  files = files.map(fileStructure.bind(null, commandType));
+  files = getContentOfFiles(files, option, count, fs, commandType);
+  return files.map(file => file.contents).join("\n");
+};
+
+const runCommand = function(userInputs, fs, commandType) {
+  let parsedInputs = parseInputs(userInputs);
+  let err = checkErrors(parsedInputs,commandType);
+  return err || command(parsedInputs, fs, commandType);
+};
+
 module.exports = {
   read,
   checkErrors,
@@ -78,5 +97,7 @@ module.exports = {
   getContentOfFiles,
   errorForExistsChecker,
   errorForIllegalCount,
-  errorForIllegalOption
+  errorForIllegalOption,
+  command,
+  runCommand
 };
