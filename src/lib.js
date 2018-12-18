@@ -12,10 +12,10 @@ const errorForExistsChecker = function(fileName,coreUtil){
   return  coreUtil + ": " + fileName + ": No such file or directory";
 }
 
-const errorForIllegalCount = function(option,length,coreUtil){
+const errorForIllegalCount = function(option,count,coreUtil){
   let options = { n:"line" , c:"byte" }
-  let head = "head: illegal " + options[option] + " count -- "+length;
-  let tail = "tail: illegal offset -- "+length;
+  let head = "head: illegal " + options[option] + " count -- "+count;
+  let tail = "tail: illegal offset -- "+count;
   let errorTypes = {head,tail};
   return errorTypes[coreUtil];
 }
