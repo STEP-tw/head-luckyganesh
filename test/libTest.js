@@ -14,16 +14,12 @@ const { fileStructure } = require("../src/fileLibrary.js");
 
 const { deepEqual } = require("assert");
 
-const checkExist = () => true;
-const checkNotExist = () => false;
-
-const readLine = function(fileName) {
-  return "line1\nline2\nline3\nline4\nline5";
-};
-
-let readCharacter = function(name) {
-  return "hello";
-};
+const {
+  checkExist,
+  checkNotExist,
+  readLine,
+  readCharacter
+} = require('./helperFunctions.js')
 
 describe("read", function() {
   it("should return a line", function() {
