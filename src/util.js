@@ -1,17 +1,17 @@
-const getContentFromTop = function(separator,content, length) {
-  let result = content.split(separator);
+const getContentFromTop = function(delimeter,content, length) {
+  let result = content.split(delimeter);
   return result
     .slice(0, length)
-    .join(separator);
+    .join(delimeter);
 };
 
-const getContentFromBottom = function(separator, content, length) {
-  let result = content.split(separator).reverse();
+const getContentFromBottom = function(delimeter, content, length) {
+  let result = content.split(delimeter).reverse();
   if(result[0] === ""){
     result = result.slice(1);
   }
   result = result.slice(0,length).reverse();
-  return result.join(separator);
+  return result.join(delimeter);
 };
 
 const createHeading = function(name) {
