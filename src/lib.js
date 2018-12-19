@@ -2,65 +2,61 @@ const { createHeading } = require("./util.js");
 
 const { fileStructure } = require("./fileLibrary");
 
-const { parseInputs } = require('./parseInputs.js');
+const { parseInputs } = require("./parseInputs.js");
 
 const read = function(reader, encryption, filePath) {
   return reader(filePath, encryption);
 };
 
-const errorForExistsChecker = function(fileName,coreUtil){
-  return  coreUtil + ": " + fileName + ": No such file or directory";
-}
+const errorForExistsChecker = function(fileName, coreUtil) {
+  return coreUtil + ": " + fileName + ": No such file or directory";
+};
 
-const errorForIllegalCount = function(option,count,coreUtil){
-  let options = { n:"line" , c:"byte" }
-  let head = "head: illegal " + options[option] + " count -- "+count;
-  let tail = "tail: illegal offset -- "+count;
-  let errorTypes = {head,tail};
+const errorForIllegalCount = function(option, count, coreUtil) {
+  let options = { n: "line", c: "byte" };
+  let head = "head: illegal " + options[option] + " count -- " + count;
+  let tail = "tail: illegal offset -- " + count;
+  let errorTypes = { head, tail };
   return errorTypes[coreUtil];
-}
+};
 
-const errorForIllegalOption = function(option,coreUtil){
-  let head = "head: illegal option -- " + 
-              option +
-             "\nusage: head [-n lines | -c bytes] [file ...]";
-  let tail = "tail: illegal option -- " +
-              option +
-              "\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]";
-  let errorTypes = {head ,tail};
+const errorForIllegalOption = function(option, coreUtil) {
+  let head =
+    "head: illegal option -- " +
+    option +
+    "\nusage: head [-n lines | -c bytes] [file ...]";
+  let tail =
+    "tail: illegal option -- " +
+    option +
+    "\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]";
+  let errorTypes = { head, tail };
   return errorTypes[coreUtil];
-}
+};
 
 const doesExists = function(checker, filePath) {
   return checker(filePath);
 };
 
-const checkErrors = function(parsedInputs,coreUtil) {
+const checkErrors = function(parsedInputs, coreUtil) {
   let { option, count } = parsedInputs;
   if (option != "n" && option != "c") {
-    return errorForIllegalOption(option,coreUtil)
+    return errorForIllegalOption(option, coreUtil);
   }
-  if(count == 0 && coreUtil == "tail"){
+  if (count == 0 && coreUtil == "tail") {
     return "";
   }
   if (!(count > 0)) {
-    return errorForIllegalCount(option,count,coreUtil);
+    return errorForIllegalCount(option, count, coreUtil);
   }
   return "";
 };
 
-const getContentOfFiles = function(
-  files,
-  option,
-  count,
-  fs,
-  coreUtil
-) {
+const getContentOfFiles = function(files, option, count, fs, coreUtil) {
   const existChecker = fs.existsSync;
   const reader = fs.readFileSync;
   files = files.map(file => {
     if (!doesExists(existChecker, file.fileName)) {
-      file.contents = errorForExistsChecker(file.fileName,coreUtil);
+      file.contents = errorForExistsChecker(file.fileName, coreUtil);
       return file;
     }
     let heading = createHeading(file.fileName) + "\n";
@@ -70,7 +66,7 @@ const getContentOfFiles = function(
     let optionSelected = { n: "getLines", c: "getBytes" };
     let coreUtilFunc = file[optionSelected[option]];
     file.contents = read(reader, "utf-8", file.fileName);
-    file.contents = coreUtilFunc(file.contents,count);
+    file.contents = coreUtilFunc(file.contents, count);
     file.contents = heading + file.contents;
     return file;
   });
@@ -86,7 +82,7 @@ const command = function(parsedInputs, fs, coreUtil) {
 
 const runCommand = function(userInputs, fs, coreUtil) {
   let parsedInputs = parseInputs(userInputs);
-  let err = checkErrors(parsedInputs,coreUtil);
+  let err = checkErrors(parsedInputs, coreUtil);
   return err || command(parsedInputs, fs, coreUtil);
 };
 
