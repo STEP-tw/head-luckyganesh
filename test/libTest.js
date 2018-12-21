@@ -199,4 +199,8 @@ describe("runCommand", function() {
     const fs = { readFileSync: readLine, existsSync: checkExist };
     deepEqual(runCommand(["-n2", "file1"], fs, "tail"), "line4\nline5");
   });
+  it("should return 2 characters from end", function() {
+    const fs = { readFileSync: readLine, existsSync: checkExist };
+    deepEqual(runCommand(["-c2", "file1"], fs, "tail"), "e5");
+  });
 });
