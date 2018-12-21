@@ -1,0 +1,27 @@
+{
+  "name": "head-luckyganesh",
+  "version": "1.0.0",
+  "description": "packages for head and tail",
+  "main": "head.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "head": "node head.js",
+    "allTests": "./scripts/run_all_test.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEP-tw/head-luckyganesh.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STEP-tw/head-luckyganesh/issues"
+  },
+  "homepage": "https://github.com/STEP-tw/head-luckyganesh#readme",
+  "dependencies": {
+    "mocha": "^5.2.0"
+  }
+}
