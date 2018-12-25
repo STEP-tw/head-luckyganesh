@@ -1,6 +1,6 @@
-const { runCommand } = require('./src/lib')
+const { head } = require('./src/lib')
 const fs = require("fs");
 const main = function() {
-  console.log(runCommand(process.argv.slice(2),fs,"head"))
+  console.log(head(process.argv.slice(2),fs))
 };
 main();

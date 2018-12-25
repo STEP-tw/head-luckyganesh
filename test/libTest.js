@@ -181,26 +181,26 @@ describe("runCommand", function() {
   it("should work for default condition", function() {
     const fs = { readFileSync: readLine, existsSync: checkExist };
     deepEqual(
-      runCommand(["file"], fs, "head"),
+      runCommand("head", ["file"], fs),
       "line1\nline2\nline3\nline4\nline5"
     );
   });
   it("should work to give n lines ", function() {
     const fs = { readFileSync: readLine, existsSync: checkExist };
-    deepEqual(runCommand(["-n3", "file"], fs, "head"), "line1\nline2\nline3");
-    deepEqual(runCommand(["-n1", "file"], fs, "head"), "line1");
+    deepEqual(runCommand("head", ["-n3", "file"], fs), "line1\nline2\nline3");
+    deepEqual(runCommand("head" , ["-n1", "file"], fs ), "line1");
   });
   it("should work to give n bytes", function() {
     const fs = { readFileSync: readCharacter, existsSync: checkExist };
-    deepEqual(runCommand(["-c2", "file"], fs, "head"), "he");
-    deepEqual(runCommand(["-c3", "file"], fs, "head"), "hel");
+    deepEqual(runCommand("head",["-c2", "file"], fs), "he");
+    deepEqual(runCommand("head",["-c3", "file"], fs), "hel");
   });
   it("should return 2 lines from end", function() {
     const fs = { readFileSync: readLine, existsSync: checkExist };
-    deepEqual(runCommand(["-n2", "file1"], fs, "tail"), "line4\nline5");
+    deepEqual(runCommand("tail" , ["-n2", "file1"], fs), "line4\nline5");
   });
   it("should return 2 characters from end", function() {
     const fs = { readFileSync: readLine, existsSync: checkExist };
-    deepEqual(runCommand(["-c2", "file1"], fs, "tail"), "e5");
+    deepEqual(runCommand("tail", ["-c2", "file1"], fs), "e5");
   });
 });

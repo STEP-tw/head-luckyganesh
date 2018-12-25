@@ -80,11 +80,14 @@ const command = function(parsedInputs, fs, coreUtil) {
   return files.map(file => file.contents).join("\n");
 };
 
-const runCommand = function(userInputs, fs, coreUtil) {
+const runCommand = function(coreUtil, userInputs, fs) {
   let parsedInputs = parseInputs(userInputs);
   let err = checkErrors(parsedInputs, coreUtil);
   return err || command(parsedInputs, fs, coreUtil);
 };
+
+const head = runCommand.bind(null,"head");
+const tail = runCommand.bind(null,"tail");
 
 module.exports = {
   read,
@@ -95,5 +98,7 @@ module.exports = {
   errorForIllegalCount,
   errorForIllegalOption,
   command,
-  runCommand
+  runCommand,
+  head,
+  tail
 };
